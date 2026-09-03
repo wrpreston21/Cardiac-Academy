@@ -7,224 +7,384 @@
 <title>Pulmonary Artery Catheter | Cardiac Toys</title>
 
 <style>
-* {
-  box-sizing: border-box;
+:root{
+  --bg:#07111f;
+  --panel:#101d2d;
+  --panel2:#16263a;
+  --border:#29405a;
+  --text:#f5f8fc;
+  --muted:#9eafc1;
+  --blue:#4fa3ff;
+  --red:#ff5d68;
+  --green:#55d68b;
+  --yellow:#ffd166;
 }
 
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #07111f;
-  color: #ffffff;
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
 }
 
-header {
-  padding: 25px 5%;
-  border-bottom: 1px solid #26384d;
+header{
+  padding:20px 6%;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-.brand {
-  font-size: 22px;
-  font-weight: bold;
-  color: #4fa3ff;
+.logo{
+  font-weight:bold;
+  letter-spacing:1px;
 }
 
-.back {
-  color: #aab7c4;
-  text-decoration: none;
-  font-size: 14px;
+.back{
+  color:var(--blue);
+  text-decoration:none;
 }
 
-.hero {
-  padding: 45px 5% 25px;
+main{
+  width:min(1400px,94%);
+  margin:auto;
+  padding:40px 0 80px;
 }
 
-.hero h1 {
-  font-size: 42px;
-  margin: 0 0 10px;
+.hero{
+  text-align:center;
+  margin-bottom:40px;
 }
 
-.hero p {
-  color: #aab7c4;
-  font-size: 18px;
+.hero h1{
+  font-size:clamp(34px,5vw,58px);
+  margin:0 0 12px;
 }
 
-.layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 25px;
-  padding: 20px 5%;
+.hero p{
+  color:var(--muted);
+  font-size:18px;
+  margin:auto;
+  max-width:800px;
 }
 
-.panel {
-  background: #111f30;
-  border: 1px solid #26384d;
-  border-radius: 16px;
-  padding: 25px;
+.section-title{
+  margin-top:50px;
+  margin-bottom:8px;
 }
 
-.panel h2 {
-  margin-top: 0;
+.section-description{
+  color:var(--muted);
+  margin-top:0;
+  margin-bottom:25px;
 }
 
-.heart-placeholder {
-  min-height: 390px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  border: 1px dashed #40546b;
-  border-radius: 12px;
-  color: #aab7c4;
-  text-align: center;
+.panel{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:24px;
 }
 
-.position-buttons {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 20px;
+/* HEART AREA */
+
+.learning-grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:24px;
 }
 
-.position-buttons button {
-  background: #1b2c40;
-  color: white;
-  border: 1px solid #40546b;
-  padding: 10px 16px;
-  border-radius: 8px;
-  cursor: pointer;
+.heart-panel{
+  min-height:560px;
 }
 
-.position-buttons button:hover {
-  border-color: #4fa3ff;
+.heart-title{
+  text-align:center;
+  margin-top:0;
 }
 
-.inputs {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
+.heart-wrap{
+  display:flex;
+  justify-content:center;
 }
 
-.input-group label {
-  display: block;
-  color: #aab7c4;
-  font-size: 13px;
-  margin-bottom: 6px;
+.heart{
+  width:min(100%,550px);
+  height:auto;
 }
 
-.input-row {
-  display: flex;
-  align-items: center;
+.chamber{
+  cursor:pointer;
+  transition:.2s;
 }
 
-.input-row input {
-  width: 100%;
-  background: #07111f;
-  color: white;
-  border: 1px solid #40546b;
-  border-radius: 8px;
-  padding: 11px;
-  font-size: 16px;
+.chamber:hover,
+.chamber.active{
+  filter:brightness(1.35);
+  stroke:white;
+  stroke-width:3;
 }
 
-.unit {
-  margin-left: 8px;
-  color: #778899;
-  font-size: 12px;
-  min-width: 55px;
+.catheter{
+  fill:none;
+  stroke:var(--yellow);
+  stroke-width:7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
 }
 
-.results-section {
-  padding: 20px 5% 50px;
+.catheter-tip{
+  fill:var(--yellow);
 }
 
-.results {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
+.location-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+  margin-top:20px;
 }
 
-.result-card {
-  background: #111f30;
-  border: 1px solid #26384d;
-  border-radius: 14px;
-  padding: 20px;
-  cursor: pointer;
-  transition: 0.2s;
+.location-buttons button,
+.method-buttons button{
+  border:1px solid var(--border);
+  background:var(--panel2);
+  color:white;
+  padding:12px 16px;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:15px;
 }
 
-.result-card:hover {
-  border-color: #4fa3ff;
-  transform: translateY(-2px);
+.location-buttons button.active,
+.method-buttons button.active{
+  border-color:var(--blue);
+  background:#183b60;
 }
 
-.result-name {
-  color: #aab7c4;
-  font-size: 14px;
+/* WAVEFORM */
+
+.waveform-box{
+  background:#050c15;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:15px;
+  margin-top:15px;
 }
 
-.result-value {
-  font-size: 30px;
-  font-weight: bold;
-  margin: 8px 0;
+#waveform{
+  width:100%;
+  height:180px;
 }
 
-.result-unit {
-  color: #778899;
-  font-size: 12px;
+.wave-grid{
+  stroke:#17304a;
+  stroke-width:1;
 }
 
-.explanation {
-  margin-top: 25px;
-  background: #111f30;
-  border-left: 4px solid #4fa3ff;
-  border-radius: 8px;
-  padding: 20px;
-  display: none;
+.wave-line{
+  fill:none;
+  stroke:#4ee1ff;
+  stroke-width:4;
+  stroke-linecap:round;
+  stroke-linejoin:round;
 }
 
-.explanation h3 {
-  margin-top: 0;
+.info-card{
+  margin-top:20px;
+  background:var(--panel2);
+  border-radius:14px;
+  padding:20px;
 }
 
-.equation {
-  font-family: monospace;
-  background: #07111f;
-  padding: 12px;
-  border-radius: 8px;
-  margin: 12px 0;
+.info-card h3{
+  margin-top:0;
 }
 
-.disclaimer {
-  color: #778899;
-  text-align: center;
-  font-size: 12px;
-  padding: 30px;
+.info-card p{
+  color:#d5deea;
+  line-height:1.55;
 }
 
-@media(max-width: 800px) {
+/* INPUTS */
 
-  .layout {
-    grid-template-columns: 1fr;
+.input-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+
+.input-card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
+}
+
+.input-card label{
+  display:block;
+  font-weight:bold;
+  margin-bottom:7px;
+}
+
+.input-card small{
+  color:var(--muted);
+  display:block;
+  min-height:34px;
+  margin-bottom:8px;
+}
+
+.input-card input{
+  width:100%;
+  background:#07111f;
+  color:white;
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:12px;
+  font-size:17px;
+}
+
+/* RESULTS */
+
+.result-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.result{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:20px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.result:hover{
+  transform:translateY(-2px);
+  border-color:var(--blue);
+}
+
+.result.abnormal{
+  border:2px solid var(--red);
+  background:#2a151d;
+}
+
+.result.normal{
+  border-color:#315946;
+}
+
+.result-name{
+  color:var(--muted);
+  font-size:14px;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+}
+
+.result-value{
+  font-size:28px;
+  font-weight:bold;
+  margin:8px 0;
+}
+
+.status{
+  font-size:13px;
+  font-weight:bold;
+}
+
+.status.high,
+.status.low{
+  color:var(--red);
+}
+
+.status.normal{
+  color:var(--green);
+}
+
+.range{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:8px;
+}
+
+/* EXPLANATION */
+
+#explanation{
+  display:none;
+  margin-top:20px;
+  border-left:4px solid var(--blue);
+}
+
+#explanation.show{
+  display:block;
+}
+
+.formula{
+  font-family:Consolas,monospace;
+  background:#07111f;
+  padding:14px;
+  border-radius:10px;
+  overflow:auto;
+}
+
+.causes{
+  margin-top:15px;
+  background:#27151c;
+  border:1px solid #6c3039;
+  padding:16px;
+  border-radius:10px;
+}
+
+.causes h4{
+  color:var(--red);
+  margin-top:0;
+}
+
+/* FICK */
+
+.fick-equation{
+  text-align:center;
+  font-size:22px;
+  background:#07111f;
+  padding:20px;
+  border-radius:12px;
+  margin:20px 0;
+  font-family:Consolas,monospace;
+}
+
+.fick-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.disclaimer{
+  color:var(--muted);
+  font-size:13px;
+  text-align:center;
+  margin-top:60px;
+  border-top:1px solid var(--border);
+  padding-top:25px;
+}
+
+@media(max-width:1000px){
+  .learning-grid{grid-template-columns:1fr}
+  .input-grid{grid-template-columns:repeat(2,1fr)}
+  .result-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:600px){
+  .input-grid,
+  .result-grid,
+  .fick-grid{
+    grid-template-columns:1fr;
   }
 
-  .results {
-    grid-template-columns: 1fr 1fr;
-  }
-
-}
-
-@media(max-width: 500px) {
-
-  .inputs,
-  .results {
-    grid-template-columns: 1fr;
-  }
-
-  .hero h1 {
-    font-size: 32px;
-  }
-
+  main{width:92%}
+  .panel{padding:16px}
 }
 </style>
 </head>
@@ -232,55 +392,139 @@ header {
 <body>
 
 <header>
-  <div class="brand">CARDIAC TOYS</div>
-  <br>
-  <a class="back" href="index.html">← Back to Devices</a>
+  <div class="logo">CARDIAC TOYS</div>
+  <a class="back" href="index.html">← All Devices</a>
 </header>
 
+<main>
 
 <section class="hero">
-
-<h1>Pulmonary Artery Catheter</h1>
-
-<p>
-Explore invasive hemodynamics by changing patient values and seeing how
-cardiovascular calculations respond.
-</p>
-
+  <h1>Pulmonary Artery Catheter</h1>
+  <p>
+    Follow the catheter through the heart, recognize the waveforms,
+    enter patient measurements, and understand the resulting hemodynamics.
+  </p>
 </section>
 
 
-<section class="layout">
+<!-- =====================================================
+     INTERACTIVE HEART
+===================================================== -->
 
-<div class="panel">
+<section>
 
-<h2>Interactive PAC</h2>
+<h2 class="section-title">Explore the PAC</h2>
 
-<div class="heart-placeholder">
-
-<h3>Interactive Heart Coming Next</h3>
-
-<p>
-The catheter will travel through:
+<p class="section-description">
+Select a catheter location to see what the distal tip is measuring
+and the normal waveform expected at that location.
 </p>
 
-<strong>
-Right Atrium → Right Ventricle → Pulmonary Artery → Wedge
-</strong>
+<div class="learning-grid">
+
+<div class="panel heart-panel">
+
+<h3 class="heart-title">Catheter Position</h3>
+
+<div class="heart-wrap">
+
+<svg class="heart" viewBox="0 0 600 500"
+     aria-label="Simplified interactive heart showing pulmonary artery catheter">
+
+<!-- vessels -->
+<path d="M170 0 L170 100"
+      stroke="#3c75a8"
+      stroke-width="55"/>
+
+<path d="M430 30 C520 60 530 150 500 200"
+      fill="none"
+      stroke="#a83c4b"
+      stroke-width="50"/>
+
+<!-- RA -->
+<ellipse
+  id="raHeart"
+  class="chamber"
+  cx="190"
+  cy="180"
+  rx="85"
+  ry="90"
+  fill="#285a83"
+  stroke="#487aa0"
+  stroke-width="3"/>
+
+<!-- RV -->
+<path
+  id="rvHeart"
+  class="chamber"
+  d="M170 250
+     C170 390 250 450 310 430
+     C330 350 310 270 260 230 Z"
+  fill="#245277"
+  stroke="#487aa0"
+  stroke-width="3"/>
+
+<!-- LA -->
+<ellipse
+  cx="410"
+  cy="170"
+  rx="70"
+  ry="65"
+  fill="#8b3440"
+  stroke="#b65361"
+  stroke-width="3"/>
+
+<!-- LV -->
+<path
+  d="M350 230
+     C330 330 350 450 410 470
+     C500 400 520 290 460 220 Z"
+  fill="#9b3543"
+  stroke="#c25c69"
+  stroke-width="3"/>
+
+<!-- PA -->
+<path
+  id="paHeart"
+  class="chamber"
+  d="M280 225 C310 130 390 105 500 120"
+  fill="none"
+  stroke="#346a96"
+  stroke-width="45"
+  stroke-linecap="round"/>
+
+<!-- catheter -->
+<path
+  class="catheter"
+  d="M170 15
+     L170 115
+     C170 155 185 180 210 205
+     C235 230 220 270 245 305
+     C280 350 300 280 295 235
+     C300 175 370 145 485 125"/>
+
+<circle
+  id="catheterTip"
+  class="catheter-tip"
+  cx="485"
+  cy="125"
+  r="10"/>
+
+<text x="130" y="180" fill="white">RA</text>
+<text x="225" y="340" fill="white">RV</text>
+<text x="390" y="115" fill="white">PA</text>
+<text x="395" y="175" fill="white">LA</text>
+<text x="405" y="350" fill="white">LV</text>
+
+</svg>
 
 </div>
 
-
-<div class="position-buttons">
-
-<button>Right Atrium</button>
-
-<button>Right Ventricle</button>
-
-<button>Pulmonary Artery</button>
-
-<button>Wedge</button>
-
+<div class="location-buttons">
+<button data-location="ra">Right Atrium</button>
+<button data-location="rv">Right Ventricle</button>
+<button data-location="pa" class="active">Pulmonary Artery</button>
+<button data-location="wedge">Wedge</button>
 </div>
 
 </div>
@@ -288,90 +532,139 @@ Right Atrium → Right Ventricle → Pulmonary Artery → Wedge
 
 <div class="panel">
 
-<h2>Patient Data</h2>
+<h3 id="locationTitle">Pulmonary Artery</h3>
 
-<div class="inputs">
+<div class="waveform-box">
 
-<div class="input-group">
+<svg id="waveform" viewBox="0 0 700 180">
+
+<g>
+<line class="wave-grid" x1="0" y1="45" x2="700" y2="45"/>
+<line class="wave-grid" x1="0" y1="90" x2="700" y2="90"/>
+<line class="wave-grid" x1="0" y1="135" x2="700" y2="135"/>
+
+<line class="wave-grid" x1="100" y1="0" x2="100" y2="180"/>
+<line class="wave-grid" x1="200" y1="0" x2="200" y2="180"/>
+<line class="wave-grid" x1="300" y1="0" x2="300" y2="180"/>
+<line class="wave-grid" x1="400" y1="0" x2="400" y2="180"/>
+<line class="wave-grid" x1="500" y1="0" x2="500" y2="180"/>
+<line class="wave-grid" x1="600" y1="0" x2="600" y2="180"/>
+</g>
+
+<path id="wavePath" class="wave-line"></path>
+
+</svg>
+
+</div>
+
+<div class="info-card">
+
+<h3 id="measurementName">Pulmonary Artery Pressure</h3>
+
+<p id="measurementDefinition">
+Pressure within the pulmonary artery. The systolic pressure reflects
+right ventricular ejection, while the diastolic and mean pressures
+provide information about the pulmonary circulation.
+</p>
+
+<p id="measurementRange">
+<strong>Educational reference:</strong>
+PASP 15–25 mmHg • PADP 8–15 mmHg • mPAP 10–20 mmHg
+</p>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- =====================================================
+     MEASURED VALUES
+===================================================== -->
+
+<section>
+
+<h2 class="section-title">Measured Patient Data</h2>
+
+<p class="section-description">
+Enter the patient's directly obtained values. Calculated hemodynamics
+below will update automatically.
+</p>
+
+<div class="input-grid">
+
+<div class="input-card">
 <label>Heart Rate</label>
-<div class="input-row">
+<small>Beats per minute</small>
 <input id="hr" type="number" value="80">
-<span class="unit">bpm</span>
-</div>
 </div>
 
-
-<div class="input-group">
-<label>Systolic BP</label>
-<div class="input-row">
+<div class="input-card">
+<label>SBP</label>
+<small>Systolic arterial pressure (mmHg)</small>
 <input id="sbp" type="number" value="120">
-<span class="unit">mmHg</span>
-</div>
 </div>
 
-
-<div class="input-group">
-<label>Diastolic BP</label>
-<div class="input-row">
-<input id="dbp" type="number" value="70">
-<span class="unit">mmHg</span>
-</div>
+<div class="input-card">
+<label>DBP</label>
+<small>Diastolic arterial pressure (mmHg)</small>
+<input id="dbp" type="number" value="80">
 </div>
 
-
-<div class="input-group">
-<label>CVP</label>
-<div class="input-row">
-<input id="cvp" type="number" value="8">
-<span class="unit">mmHg</span>
-</div>
+<div class="input-card">
+<label>RAP / CVP</label>
+<small>Right atrial pressure (mmHg)</small>
+<input id="cvp" type="number" value="5">
 </div>
 
+<div class="input-card">
+<label>RV Systolic</label>
+<small>Right ventricular systolic pressure</small>
+<input id="rvs" type="number" value="22">
+</div>
 
-<div class="input-group">
+<div class="input-card">
+<label>RV Diastolic</label>
+<small>Right ventricular diastolic pressure</small>
+<input id="rvd" type="number" value="4">
+</div>
+
+<div class="input-card">
 <label>PA Systolic</label>
-<div class="input-row">
+<small>Pulmonary artery systolic pressure</small>
 <input id="pas" type="number" value="25">
-<span class="unit">mmHg</span>
-</div>
 </div>
 
-
-<div class="input-group">
+<div class="input-card">
 <label>PA Diastolic</label>
-<div class="input-row">
+<small>Pulmonary artery diastolic pressure</small>
 <input id="pad" type="number" value="10">
-<span class="unit">mmHg</span>
-</div>
 </div>
 
-
-<div class="input-group">
-<label>PAOP / Wedge</label>
-<div class="input-row">
-<input id="wedge" type="number" value="12">
-<span class="unit">mmHg</span>
-</div>
+<div class="input-card">
+<label>PA Mean</label>
+<small>Measured mean pulmonary artery pressure</small>
+<input id="mpap" type="number" value="15">
 </div>
 
+<div class="input-card">
+<label>PAOP / PCWP</label>
+<small>Pulmonary artery wedge pressure</small>
+<input id="wedge" type="number" value="10">
+</div>
 
-<div class="input-group">
+<div class="input-card">
 <label>Cardiac Output</label>
-<div class="input-row">
-<input id="co" type="number" step="0.1" value="5">
-<span class="unit">L/min</span>
-</div>
+<small>Liters per minute</small>
+<input id="co" type="number" step=".1" value="5">
 </div>
 
-
-<div class="input-group">
+<div class="input-card">
 <label>Body Surface Area</label>
-<div class="input-row">
-<input id="bsa" type="number" step="0.1" value="2">
-<span class="unit">m²</span>
-</div>
-</div>
-
+<small>m²</small>
+<input id="bsa" type="number" step=".01" value="2">
 </div>
 
 </div>
@@ -379,297 +672,639 @@ Right Atrium → Right Ventricle → Pulmonary Artery → Wedge
 </section>
 
 
-<section class="results-section">
+<!-- =====================================================
+     CALCULATED RESULTS
+===================================================== -->
 
-<h2>Calculated Hemodynamics</h2>
+<section>
 
-<p style="color:#aab7c4;">
-Change any patient value above. Calculations update automatically.
-Click a result to understand what it means.
+<h2 class="section-title">Calculated Hemodynamics</h2>
+
+<p class="section-description">
+Click any result to see what it means, how it was calculated,
+and what may contribute to an abnormal value.
 </p>
 
+<div id="results" class="result-grid"></div>
 
-<div class="results">
+<div id="explanation" class="panel"></div>
+
+</section>
 
 
-<div class="result-card" onclick="explain('map')">
-<div class="result-name">Mean Arterial Pressure</div>
-<div class="result-value" id="mapResult">--</div>
-<div class="result-unit">mmHg</div>
+<!-- =====================================================
+     FICK
+===================================================== -->
+
+<section>
+
+<h2 class="section-title">Fick Principle</h2>
+
+<p class="section-description">
+Another method of determining cardiac output uses whole-body oxygen
+consumption and the difference between arterial and mixed venous
+oxygen content.
+</p>
+
+<div class="panel">
+
+<p>
+The Fick principle states that the amount of oxygen consumed by the
+body must equal the amount of oxygen removed from the blood as it
+passes through the systemic circulation.
+</p>
+
+<div class="fick-equation">
+CO = VO₂ ÷ (CaO₂ − CvO₂)
 </div>
 
+<p>
+For this calculation, arterial oxygen content is obtained from
+systemic arterial blood and mixed venous oxygen content is obtained
+from blood sampled in the pulmonary artery.
+</p>
 
-<div class="result-card" onclick="explain('ci')">
-<div class="result-name">Cardiac Index</div>
-<div class="result-value" id="ciResult">--</div>
-<div class="result-unit">L/min/m²</div>
+<div class="fick-grid">
+
+<div class="input-card">
+<label>VO₂</label>
+<small>Oxygen consumption (mL/min)</small>
+<input id="vo2" type="number" value="250">
 </div>
 
-
-<div class="result-card" onclick="explain('sv')">
-<div class="result-name">Stroke Volume</div>
-<div class="result-value" id="svResult">--</div>
-<div class="result-unit">mL/beat</div>
+<div class="input-card">
+<label>Hemoglobin</label>
+<small>g/dL</small>
+<input id="hgb" type="number" step=".1" value="14">
 </div>
 
-
-<div class="result-card" onclick="explain('svi')">
-<div class="result-name">Stroke Volume Index</div>
-<div class="result-value" id="sviResult">--</div>
-<div class="result-unit">mL/beat/m²</div>
+<div class="input-card">
+<label>SaO₂</label>
+<small>Arterial saturation (%)</small>
+<input id="sao2" type="number" value="98">
 </div>
 
-
-<div class="result-card" onclick="explain('svr')">
-<div class="result-name">Systemic Vascular Resistance</div>
-<div class="result-value" id="svrResult">--</div>
-<div class="result-unit">dyn·s/cm⁵</div>
+<div class="input-card">
+<label>PaO₂</label>
+<small>Arterial oxygen pressure</small>
+<input id="pao2" type="number" value="100">
 </div>
 
+<div class="input-card">
+<label>SvO₂</label>
+<small>Mixed venous saturation (%)</small>
+<input id="svo2" type="number" value="75">
+</div>
 
-<div class="result-card" onclick="explain('pvr')">
-<div class="result-name">Pulmonary Vascular Resistance</div>
-<div class="result-value" id="pvrResult">--</div>
-<div class="result-unit">dyn·s/cm⁵</div>
+<div class="input-card">
+<label>PvO₂</label>
+<small>Mixed venous oxygen pressure</small>
+<input id="pvo2" type="number" value="40">
 </div>
 
 </div>
 
-
-<div class="explanation" id="explanation">
-
-<h3 id="explainTitle"></h3>
-
-<p id="explainText"></p>
-
-<div class="equation" id="explainEquation"></div>
-
-<p id="explainMeaning"></p>
+<div id="fickResult" class="info-card"></div>
 
 </div>
 
 </section>
 
 
-<div class="disclaimer">
+<p class="disclaimer">
+Cardiac Toys is intended for education and simulation only.
+Reference ranges vary by patient, clinical context, institution,
+measurement technique, ventilation, and source. This tool is not
+intended for clinical decision-making and does not replace institutional
+protocols, manufacturer instructions, or clinical judgment.
+</p>
 
-Cardiac Toys is an educational simulation only.
-It is not intended for clinical decision-making or patient care.
-
-</div>
+</main>
 
 
 <script>
 
-const inputs = document.querySelectorAll("input");
+/* =====================================================
+   HELPERS
+===================================================== */
 
-inputs.forEach(input => {
-  input.addEventListener("input", calculate);
+function n(id){
+  return Number(document.getElementById(id).value);
+}
+
+function round(value,digits=1){
+  if(!Number.isFinite(value)) return "—";
+  return value.toFixed(digits);
+}
+
+
+/* =====================================================
+   CALCULATIONS
+===================================================== */
+
+function calculate(){
+
+  const HR=n("hr");
+  const SBP=n("sbp");
+  const DBP=n("dbp");
+  const RAP=n("cvp");
+  const mPAP=n("mpap");
+  const wedge=n("wedge");
+  const CO=n("co");
+  const BSA=n("bsa");
+
+  const MAP=DBP+(SBP-DBP)/3;
+
+  const CI=CO/BSA;
+
+  const SV=(CO*1000)/HR;
+
+  const SVI=SV/BSA;
+
+  const SVR=80*(MAP-RAP)/CO;
+
+  const SVRI=80*(MAP-RAP)/CI;
+
+  const PVR=80*(mPAP-wedge)/CO;
+
+  const PVRI=80*(mPAP-wedge)/CI;
+
+  const RVSW=
+    SV*(mPAP-RAP)*0.0136;
+
+  const RVSWI=
+    SVI*(mPAP-RAP)*0.0136;
+
+  const LVSW=
+    SV*(MAP-wedge)*0.0136;
+
+  const LVSWI=
+    SVI*(MAP-wedge)*0.0136;
+
+
+  const data=[
+
+    {
+      name:"MAP",
+      value:MAP,
+      unit:"mmHg",
+      low:60,
+      high:null,
+      normal:"> 60",
+      definition:
+      "Mean arterial pressure approximates the average pressure driving systemic blood flow.",
+      formula:"MAP ≈ DBP + ⅓(SBP − DBP)",
+      math:`${DBP} + ⅓(${SBP} − ${DBP})`,
+      causesLow:[
+        "Reduced circulating volume",
+        "Reduced cardiac output",
+        "Systemic vasodilation"
+      ]
+    },
+
+    {
+      name:"Cardiac Index",
+      value:CI,
+      unit:"L/min/m²",
+      low:2.5,
+      high:4,
+      normal:"2.5–4",
+      definition:
+      "Cardiac index is cardiac output adjusted for body surface area.",
+      formula:"CI = CO / BSA",
+      math:`${CO} / ${BSA}`,
+      causesLow:[
+        "Reduced cardiac output",
+        "Impaired ventricular pump function"
+      ],
+      causesHigh:[
+        "High-output physiologic states",
+        "Reduced systemic vascular resistance"
+      ]
+    },
+
+    {
+      name:"Stroke Volume",
+      value:SV,
+      unit:"mL/beat",
+      low:60,
+      high:100,
+      normal:"60–100",
+      definition:
+      "Stroke volume is the amount of blood ejected by the ventricle with each heartbeat.",
+      formula:"SV = (CO × 1000) / HR",
+      math:`(${CO} × 1000) / ${HR}`
+    },
+
+    {
+      name:"Stroke Volume Index",
+      value:SVI,
+      unit:"mL/beat/m²",
+      low:35,
+      high:65,
+      normal:"35–65",
+      definition:
+      "Stroke volume index is stroke volume corrected for body surface area.",
+      formula:"SVI = SV / BSA",
+      math:`${round(SV)} / ${BSA}`
+    },
+
+    {
+      name:"SVR",
+      value:SVR,
+      unit:"dyn·s/cm⁵",
+      low:800,
+      high:1200,
+      normal:"800–1200",
+      definition:
+      "Systemic vascular resistance represents resistance to blood flow through the systemic circulation and is an important component of left ventricular afterload.",
+      formula:"SVR = 80 × (MAP − RAP) / CO",
+      math:`80 × (${round(MAP)} − ${RAP}) / ${CO}`,
+      causesLow:[
+        "Systemic vasodilation",
+        "Distributive physiology"
+      ],
+      causesHigh:[
+        "Systemic vasoconstriction",
+        "Low cardiac output states"
+      ]
+    },
+
+    {
+      name:"SVRI",
+      value:SVRI,
+      unit:"dyn·s·m²/cm⁵",
+      low:1970,
+      high:2390,
+      normal:"1970–2390",
+      definition:
+      "Systemic vascular resistance index expresses systemic vascular resistance relative to body size.",
+      formula:"SVRI = 80 × (MAP − RAP) / CI",
+      math:`80 × (${round(MAP)} − ${RAP}) / ${round(CI,2)}`
+    },
+
+    {
+      name:"PVR",
+      value:PVR,
+      unit:"dyn·s/cm⁵",
+      low:null,
+      high:250,
+      normal:"< 250",
+      definition:
+      "Pulmonary vascular resistance represents resistance the right ventricle must overcome to move blood through the pulmonary circulation.",
+      formula:"PVR = 80 × (mPAP − PAOP) / CO",
+      math:`80 × (${mPAP} − ${wedge}) / ${CO}`,
+      causesHigh:[
+        "Increased resistance within the pulmonary circulation",
+        "Pulmonary vascular obstruction or vasoconstriction"
+      ]
+    },
+
+    {
+      name:"PVRI",
+      value:PVRI,
+      unit:"dyn·s·m²/cm⁵",
+      low:255,
+      high:285,
+      normal:"255–285",
+      definition:
+      "Pulmonary vascular resistance index expresses pulmonary vascular resistance relative to patient body size.",
+      formula:"PVRI = 80 × (mPAP − PAOP) / CI",
+      math:`80 × (${mPAP} − ${wedge}) / ${round(CI,2)}`
+    },
+
+    {
+      name:"RV Stroke Work",
+      value:RVSW,
+      unit:"g·m/beat",
+      low:10,
+      high:20,
+      normal:"10–20",
+      definition:
+      "Right ventricular stroke work estimates the work performed by the right ventricle during each beat.",
+      formula:"RVSW = SV × (mPAP − RAP) × 0.0136",
+      math:`${round(SV)} × (${mPAP} − ${RAP}) × 0.0136`
+    },
+
+    {
+      name:"RVSWI",
+      value:RVSWI,
+      unit:"g·m/beat/m²",
+      low:5,
+      high:10,
+      normal:"5–10",
+      definition:
+      "Right ventricular stroke work index adjusts right ventricular stroke work for body surface area.",
+      formula:"RVSWI = SVI × (mPAP − RAP) × 0.0136",
+      math:`${round(SVI)} × (${mPAP} − ${RAP}) × 0.0136`
+    },
+
+    {
+      name:"LV Stroke Work",
+      value:LVSW,
+      unit:"g·m/beat",
+      low:60,
+      high:130,
+      normal:"60–130",
+      definition:
+      "Left ventricular stroke work estimates the work performed by the left ventricle during each beat.",
+      formula:"LVSW = SV × (MAP − PAOP) × 0.0136",
+      math:`${round(SV)} × (${round(MAP)} − ${wedge}) × 0.0136`
+    },
+
+    {
+      name:"LVSWI",
+      value:LVSWI,
+      unit:"g·m/beat/m²",
+      low:50,
+      high:62,
+      normal:"50–62",
+      definition:
+      "Left ventricular stroke work index adjusts left ventricular stroke work for body surface area.",
+      formula:"LVSWI = SVI × (MAP − PAOP) × 0.0136",
+      math:`${round(SVI)} × (${round(MAP)} − ${wedge}) × 0.0136`
+    }
+
+  ];
+
+  renderResults(data);
+}
+
+
+/* =====================================================
+   RESULTS
+===================================================== */
+
+function renderResults(data){
+
+  const container=document.getElementById("results");
+
+  container.innerHTML="";
+
+  data.forEach(item=>{
+
+    let status="NORMAL";
+
+    if(item.low!==null && item.value<item.low)
+      status="LOW";
+
+    if(item.high!==null && item.value>item.high)
+      status="HIGH";
+
+    const card=document.createElement("div");
+
+    card.className=
+      "result "+(status==="NORMAL"?"normal":"abnormal");
+
+    card.innerHTML=`
+      <div class="result-name">${item.name}</div>
+
+      <div class="result-value">
+        ${round(item.value)}
+        <span style="font-size:14px">
+          ${item.unit}
+        </span>
+      </div>
+
+      <div class="status ${status.toLowerCase()}">
+        ${status}
+      </div>
+
+      <div class="range">
+        Educational reference: ${item.normal}
+      </div>
+    `;
+
+    card.addEventListener("click",()=>showExplanation(item,status));
+
+    container.appendChild(card);
+  });
+}
+
+
+function showExplanation(item,status){
+
+  const box=document.getElementById("explanation");
+
+  let causes="";
+
+  if(status==="HIGH" && item.causesHigh){
+
+    causes=`
+      <div class="causes">
+      <h4>What can cause this to be high?</h4>
+      <ul>
+      ${item.causesHigh.map(x=>`<li>${x}</li>`).join("")}
+      </ul>
+      </div>
+    `;
+  }
+
+  if(status==="LOW" && item.causesLow){
+
+    causes=`
+      <div class="causes">
+      <h4>What can cause this to be low?</h4>
+      <ul>
+      ${item.causesLow.map(x=>`<li>${x}</li>`).join("")}
+      </ul>
+      </div>
+    `;
+  }
+
+  box.innerHTML=`
+
+    <h2>${item.name}</h2>
+
+    <p>${item.definition}</p>
+
+    <h3>Formula</h3>
+
+    <div class="formula">
+      ${item.formula}
+    </div>
+
+    <h3>Your Patient</h3>
+
+    <div class="formula">
+      ${item.math}
+      = ${round(item.value)} ${item.unit}
+    </div>
+
+    ${causes}
+
+  `;
+
+  box.classList.add("show");
+
+  box.scrollIntoView({
+    behavior:"smooth",
+    block:"nearest"
+  });
+}
+
+
+/* =====================================================
+   WAVEFORMS
+===================================================== */
+
+const waveformData={
+
+ra:{
+ title:"Right Atrium / CVP",
+ name:"Right Atrial Pressure",
+ definition:
+ "Right atrial pressure reflects pressure within the right atrium and central venous circulation. The normal waveform contains a, c and v waves with x and y descents.",
+ range:"Educational reference: approximately 2–6 mmHg in the spontaneously breathing patient.",
+ path:"M0 120 C25 120 35 70 50 90 C65 110 75 105 85 100 C100 95 110 125 135 130 C165 135 175 80 195 90 C215 100 220 120 245 120 C270 120 280 70 300 90 C320 110 330 105 340 100 C355 95 365 125 390 130 C420 135 430 80 450 90 C470 100 480 120 500 120 C530 120 540 70 560 90 C580 110 590 105 600 100 C620 95 630 125 655 130 C675 130 685 115 700 120"
+},
+
+rv:{
+ title:"Right Ventricle",
+ name:"Right Ventricular Pressure",
+ definition:
+ "The RV waveform rises rapidly during ventricular systole and falls toward a low diastolic pressure as the right ventricle relaxes and fills.",
+ range:"Educational reference: RV systolic 15–25 mmHg • RV diastolic 0–8 mmHg.",
+ path:"M0 150 L35 150 C50 145 55 30 80 20 C105 30 115 135 135 150 L180 150 C195 145 200 30 225 20 C250 30 260 135 280 150 L325 150 C340 145 345 30 370 20 C395 30 405 135 425 150 L470 150 C485 145 490 30 515 20 C540 30 550 135 570 150 L615 150 C630 145 635 30 660 20 C680 35 690 135 700 150"
+},
+
+pa:{
+ title:"Pulmonary Artery",
+ name:"Pulmonary Artery Pressure",
+ definition:
+ "Pulmonary artery pressure reflects right ventricular ejection into the pulmonary circulation. After systolic ejection, pulmonic valve closure produces the dicrotic notch.",
+ range:"Educational reference: PASP 15–25 • PADP 8–15 • mPAP 10–20 mmHg.",
+ path:"M0 130 C20 130 35 35 60 25 C85 25 100 65 115 75 L125 65 L140 80 C165 100 180 120 200 125 C220 125 235 35 260 25 C285 25 300 65 315 75 L325 65 L340 80 C365 100 380 120 400 125 C420 125 435 35 460 25 C485 25 500 65 515 75 L525 65 L540 80 C565 100 580 120 600 125 C620 125 635 35 660 25 C680 30 690 90 700 110"
+},
+
+wedge:{
+ title:"Wedge / PAOP",
+ name:"Pulmonary Artery Occlusion Pressure",
+ definition:
+ "With the balloon inflated in an appropriate pulmonary artery branch, the distal lumen measures a static pressure column through the pulmonary circulation toward the left atrium. Under appropriate conditions this can provide an estimate of left-sided filling pressure.",
+ range:"Educational reference: 6–12 mmHg.",
+ path:"M0 120 C25 120 35 85 55 95 C75 105 85 120 110 125 C135 130 150 85 170 95 C190 105 205 120 230 120 C255 120 270 85 290 95 C310 105 325 120 350 125 C375 130 390 85 410 95 C430 105 445 120 470 120 C495 120 510 85 530 95 C550 105 565 120 590 125 C615 130 630 85 650 95 C675 105 685 120 700 120"
+}
+
+};
+
+
+function setLocation(location){
+
+ const d=waveformData[location];
+
+ document.getElementById("locationTitle").textContent=d.title;
+
+ document.getElementById("measurementName").textContent=d.name;
+
+ document.getElementById("measurementDefinition").textContent=d.definition;
+
+ document.getElementById("measurementRange").textContent=d.range;
+
+ document.getElementById("wavePath").setAttribute("d",d.path);
+
+ document.querySelectorAll(".location-buttons button")
+ .forEach(btn=>{
+   btn.classList.toggle(
+     "active",
+     btn.dataset.location===location
+   );
+ });
+
+}
+
+
+document.querySelectorAll(".location-buttons button")
+.forEach(button=>{
+ button.addEventListener("click",()=>{
+   setLocation(button.dataset.location);
+ });
 });
 
 
-function value(id) {
-  return parseFloat(document.getElementById(id).value) || 0;
+/* =====================================================
+   FICK
+===================================================== */
+
+function calculateFick(){
+
+ const VO2=n("vo2");
+ const Hb=n("hgb");
+ const Sa=n("sao2")/100;
+ const Pa=n("pao2");
+ const Sv=n("svo2")/100;
+ const Pv=n("pvo2");
+
+ const Ca=(1.34*Hb*Sa)+(0.003*Pa);
+
+ const Cv=(1.34*Hb*Sv)+(0.003*Pv);
+
+ const difference=Ca-Cv;
+
+ const CO=
+   difference>0
+   ? VO2/(difference*10)
+   : NaN;
+
+ document.getElementById("fickResult").innerHTML=`
+
+ <h3>Calculated Fick Cardiac Output</h3>
+
+ <p>
+ <strong>CaO₂:</strong>
+ ${round(Ca,2)} mL O₂/dL
+ </p>
+
+ <p>
+ <strong>CvO₂:</strong>
+ ${round(Cv,2)} mL O₂/dL
+ </p>
+
+ <p>
+ <strong>Arteriovenous O₂ difference:</strong>
+ ${round(difference,2)} mL O₂/dL
+ </p>
+
+ <div class="fick-equation">
+ Fick CO =
+ ${VO2} ÷ (${round(difference,2)} × 10)
+ =
+ ${round(CO,2)} L/min
+ </div>
+
+ <p>
+ This demonstrates how oxygen consumption and the arterial-to-mixed-venous
+ oxygen content difference can be used to derive cardiac output.
+ </p>
+
+ `;
+
 }
 
 
-function calculate() {
+/* =====================================================
+   LIVE UPDATE
+===================================================== */
 
-  const hr = value("hr");
-  const sbp = value("sbp");
-  const dbp = value("dbp");
-  const cvp = value("cvp");
-  const pas = value("pas");
-  const pad = value("pad");
-  const wedge = value("wedge");
-  const co = value("co");
-  const bsa = value("bsa");
+document.querySelectorAll("input")
+.forEach(input=>{
 
+ input.addEventListener("input",()=>{
 
-  const map = dbp + ((sbp - dbp) / 3);
+   calculate();
 
-  const mpa = pad + ((pas - pad) / 3);
+   calculateFick();
 
-  const ci = bsa > 0 ? co / bsa : 0;
+ });
 
-  const sv = hr > 0 ? (co * 1000) / hr : 0;
-
-  const svi = bsa > 0 ? sv / bsa : 0;
-
-  const svr = co > 0 ? ((map - cvp) / co) * 80 : 0;
-
-  const pvr = co > 0 ? ((mpa - wedge) / co) * 80 : 0;
-
-
-  document.getElementById("mapResult").textContent =
-    map.toFixed(1);
-
-  document.getElementById("ciResult").textContent =
-    ci.toFixed(2);
-
-  document.getElementById("svResult").textContent =
-    sv.toFixed(1);
-
-  document.getElementById("sviResult").textContent =
-    svi.toFixed(1);
-
-  document.getElementById("svrResult").textContent =
-    Math.round(svr);
-
-  document.getElementById("pvrResult").textContent =
-    Math.round(pvr);
-
-}
-
-
-function explain(type) {
-
-  const box = document.getElementById("explanation");
-  const title = document.getElementById("explainTitle");
-  const text = document.getElementById("explainText");
-  const equation = document.getElementById("explainEquation");
-  const meaning = document.getElementById("explainMeaning");
-
-
-  const hr = value("hr");
-  const sbp = value("sbp");
-  const dbp = value("dbp");
-  const cvp = value("cvp");
-  const pas = value("pas");
-  const pad = value("pad");
-  const wedge = value("wedge");
-  const co = value("co");
-  const bsa = value("bsa");
-
-  const map = dbp + ((sbp - dbp) / 3);
-  const mpa = pad + ((pas - pad) / 3);
-
-
-  if(type === "map") {
-
-    title.textContent = "Mean Arterial Pressure (MAP)";
-
-    text.textContent =
-    "MAP represents the average arterial pressure driving blood through the systemic circulation.";
-
-    equation.textContent =
-    `MAP = DBP + 1/3(SBP − DBP)
-MAP = ${dbp} + 1/3(${sbp} − ${dbp})
-MAP = ${map.toFixed(1)} mmHg`;
-
-    meaning.textContent =
-    "MAP is influenced by cardiac output and systemic vascular resistance.";
-
-  }
-
-
-  if(type === "ci") {
-
-    title.textContent = "Cardiac Index (CI)";
-
-    text.textContent =
-    "Cardiac index adjusts cardiac output for the patient's body surface area.";
-
-    equation.textContent =
-    `CI = CO ÷ BSA
-CI = ${co} ÷ ${bsa}
-CI = ${(co/bsa).toFixed(2)} L/min/m²`;
-
-    meaning.textContent =
-    "This helps compare cardiac performance between patients of different body sizes.";
-
-  }
-
-
-  if(type === "sv") {
-
-    title.textContent = "Stroke Volume (SV)";
-
-    text.textContent =
-    "Stroke volume is the amount of blood ejected by the ventricle with each heartbeat.";
-
-    equation.textContent =
-    `SV = (CO × 1000) ÷ HR
-SV = (${co} × 1000) ÷ ${hr}
-SV = ${((co*1000)/hr).toFixed(1)} mL/beat`;
-
-    meaning.textContent =
-    "Stroke volume is affected by preload, contractility, and afterload.";
-
-  }
-
-
-  if(type === "svi") {
-
-    title.textContent = "Stroke Volume Index (SVI)";
-
-    text.textContent =
-    "SVI adjusts stroke volume for body surface area.";
-
-    const sv = (co * 1000) / hr;
-
-    equation.textContent =
-    `SVI = SV ÷ BSA
-SVI = ${sv.toFixed(1)} ÷ ${bsa}
-SVI = ${(sv/bsa).toFixed(1)} mL/beat/m²`;
-
-    meaning.textContent =
-    "SVI helps evaluate the amount of blood ejected per beat relative to patient size.";
-
-  }
-
-
-  if(type === "svr") {
-
-    title.textContent = "Systemic Vascular Resistance (SVR)";
-
-    text.textContent =
-    "SVR represents the resistance blood encounters while moving through the systemic circulation.";
-
-    const svr = ((map - cvp) / co) * 80;
-
-    equation.textContent =
-    `SVR = ((MAP − CVP) ÷ CO) × 80
-SVR = ((${map.toFixed(1)} − ${cvp}) ÷ ${co}) × 80
-SVR = ${Math.round(svr)} dyn·s/cm⁵`;
-
-    meaning.textContent =
-    "Increasing vascular tone tends to increase SVR. Decreasing vascular tone tends to decrease SVR.";
-
-  }
-
-
-  if(type === "pvr") {
-
-    title.textContent = "Pulmonary Vascular Resistance (PVR)";
-
-    text.textContent =
-    "PVR represents resistance to blood flow through the pulmonary circulation.";
-
-    const pvr = ((mpa - wedge) / co) * 80;
-
-    equation.textContent =
-    `PVR = ((mPAP − PAOP) ÷ CO) × 80
-PVR = ((${mpa.toFixed(1)} − ${wedge}) ÷ ${co}) × 80
-PVR = ${Math.round(pvr)} dyn·s/cm⁵`;
-
-    meaning.textContent =
-    "PVR rises when resistance across the pulmonary vascular bed increases.";
-
-  }
-
-
-  box.style.display = "block";
-
-  box.scrollIntoView({
-    behavior: "smooth",
-    block: "center"
-  });
-
-}
+});
 
 
 calculate();
+
+calculateFick();
+
+setLocation("pa");
 
 </script>
 
