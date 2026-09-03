@@ -2,122 +2,1047 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Cardiac Toys</title>
+<title>Cardiac Academy | By Wade Preston</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #07111f;
-      color: white;
-      text-align: center;
-    }
+<style>
 
-    header {
-      padding: 80px 20px 40px;
-    }
+:root{
+  --bg:#061426;
+  --bg-deep:#030b14;
+  --panel:#0d1d2f;
+  --panel-hover:#13283e;
+  --border:#253b51;
 
-    h1 {
-      font-size: 60px;
-      margin-bottom: 10px;
-    }
+  --gold:#d5a95d;
+  --gold-light:#f0cf8d;
 
-    .subtitle {
-      color: #aab7c4;
-      font-size: 20px;
-    }
+  --text:#f4f6f8;
+  --muted:#93a5b8;
+}
 
-    .devices {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding: 40px;
-    }
+*{
+  box-sizing:border-box;
+}
 
-    .device {
-      background: #111f30;
-      border: 1px solid #26384d;
-      border-radius: 16px;
-      padding: 30px;
-      width: 220px;
-    }
+html{
+  scroll-behavior:smooth;
+}
 
-    .device h2 {
-      margin-top: 0;
-    }
+body{
+  margin:0;
+  min-height:100vh;
 
-    .available {
-      border-color: #4fa3ff;
-      cursor: pointer;
-    }
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
 
-    .coming-soon {
-      color: #778899;
-    }
+  color:var(--text);
 
-    footer {
-      margin-top: 60px;
-      padding: 30px;
-      color: #778899;
-      font-size: 14px;
-    }
-  </style>
+  background:
+    radial-gradient(
+      circle at top,
+      #102b4a 0%,
+      #07172a 34%,
+      #030b14 100%
+    );
+}
+
+
+/* =====================================
+   HERO / LOGO
+===================================== */
+
+.hero{
+  width:100%;
+  text-align:center;
+
+  padding:
+    28px 20px
+    10px;
+}
+
+.logo{
+  display:block;
+
+  width:min(
+    760px,
+    94vw
+  );
+
+  height:auto;
+
+  margin:
+    0 auto;
+
+  border-radius:12px;
+
+  filter:
+    drop-shadow(
+      0 18px 40px
+      rgba(0,0,0,.40)
+    );
+}
+
+
+/* =====================================
+   MAIN CONTENT
+===================================== */
+
+main{
+  width:min(
+    1250px,
+    92%
+  );
+
+  margin:auto;
+
+  padding-bottom:80px;
+}
+
+
+/* =====================================
+   INTRO
+===================================== */
+
+.intro{
+  text-align:center;
+
+  max-width:850px;
+
+  margin:
+    10px auto
+    42px;
+}
+
+.intro h1{
+  margin:
+    0 0 12px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-weight:normal;
+
+  font-size:
+    clamp(
+      28px,
+      4vw,
+      38px
+    );
+
+  letter-spacing:3px;
+}
+
+.gold-line{
+  width:90px;
+  height:1px;
+
+  margin:
+    17px auto;
+
+  background:
+    var(--gold);
+}
+
+.intro p{
+  color:
+    var(--muted);
+
+  font-size:17px;
+
+  line-height:1.65;
+
+  margin:0;
+}
+
+
+/* =====================================
+   DEVICE GRID
+===================================== */
+
+.devices{
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0,1fr)
+    );
+
+  gap:20px;
+}
+
+
+/* =====================================
+   DEVICE CARD
+===================================== */
+
+.device{
+  min-height:225px;
+
+  padding:27px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:
+    space-between;
+
+  position:relative;
+
+  overflow:hidden;
+
+  color:white;
+
+  text-decoration:none;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,34,53,.98),
+      rgba(7,19,31,.98)
+    );
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:15px;
+
+  box-shadow:
+    0 12px 35px
+    rgba(0,0,0,.18);
+
+  transition:
+    transform .22s ease,
+    border-color .22s ease,
+    box-shadow .22s ease,
+    background .22s ease;
+}
+
+
+/* subtle gold line */
+
+.device::before{
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  left:25px;
+
+  width:45px;
+  height:2px;
+
+  background:
+    #536577;
+}
+
+
+/* headings */
+
+.device h2{
+  margin:
+    0 0 13px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-weight:normal;
+
+  font-size:24px;
+
+  line-height:1.2;
+}
+
+
+/* descriptions */
+
+.device p{
+  color:
+    var(--muted);
+
+  line-height:1.6;
+
+  margin:0;
+}
+
+
+/* =====================================
+   AVAILABLE MODULE
+===================================== */
+
+.device.available{
+  border-color:
+    rgba(
+      213,
+      169,
+      93,
+      .60
+    );
+
+  cursor:pointer;
+}
+
+
+.device.available::before{
+  background:
+    var(--gold);
+
+  width:70px;
+}
+
+
+.device.available:hover{
+  transform:
+    translateY(-6px);
+
+  border-color:
+    var(--gold);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(21,43,65,.98),
+      rgba(8,23,37,.98)
+    );
+
+  box-shadow:
+    0 18px 45px
+    rgba(0,0,0,.35),
+
+    0 0 25px
+    rgba(
+      213,
+      169,
+      93,
+      .10
+    );
+}
+
+
+.explore{
+  margin-top:25px;
+
+  color:
+    var(--gold-light);
+
+  font-weight:bold;
+
+  letter-spacing:.5px;
+}
+
+
+/* =====================================
+   COMING SOON
+===================================== */
+
+.coming{
+  width:max-content;
+
+  margin-top:25px;
+
+  padding:
+    6px 11px;
+
+  border:
+    1px solid
+    #30465c;
+
+  border-radius:
+    20px;
+
+  color:
+    #778b9e;
+
+  font-size:
+    11px;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    1.3px;
+}
+
+
+/* =====================================
+   SECTION DIVIDER
+===================================== */
+
+.section-divider{
+  display:flex;
+
+  align-items:center;
+
+  gap:15px;
+
+  margin:
+    55px 0
+    28px;
+}
+
+
+.section-divider::before,
+.section-divider::after{
+  content:"";
+
+  height:1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--border)
+    );
+
+  flex:1;
+}
+
+
+.section-divider::after{
+  background:
+    linear-gradient(
+      90deg,
+      var(--border),
+      transparent
+    );
+}
+
+
+.section-divider span{
+  color:
+    var(--gold);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  letter-spacing:
+    2px;
+
+  font-size:
+    13px;
+}
+
+
+/* =====================================
+   ABOUT CARD
+===================================== */
+
+.about{
+  max-width:850px;
+
+  margin:
+    0 auto;
+
+  text-align:center;
+
+  padding:
+    25px 30px;
+
+  color:
+    #b1bfcc;
+
+  line-height:
+    1.7;
+}
+
+
+.about strong{
+  color:
+    var(--gold-light);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-weight:
+    normal;
+
+  letter-spacing:
+    .5px;
+}
+
+
+/* =====================================
+   FOOTER
+===================================== */
+
+footer{
+  text-align:center;
+
+  border-top:
+    1px solid
+    #17293a;
+
+  padding:
+    30px 20px
+    40px;
+
+  color:
+    #6f8193;
+
+  font-size:
+    13px;
+
+  line-height:
+    1.7;
+}
+
+
+.footer-name{
+  margin-bottom:
+    8px;
+
+  color:
+    var(--gold);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  letter-spacing:
+    2px;
+}
+
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media(
+  max-width:950px
+){
+
+  .devices{
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0,1fr)
+      );
+  }
+
+}
+
+
+@media(
+  max-width:620px
+){
+
+  .hero{
+    padding:
+      15px 8px
+      5px;
+  }
+
+  .logo{
+    width:100%;
+  }
+
+  main{
+    width:92%;
+  }
+
+  .intro{
+    margin-top:10px;
+  }
+
+  .intro p{
+    font-size:15px;
+  }
+
+  .devices{
+    grid-template-columns:
+      1fr;
+  }
+
+  .device{
+    min-height:190px;
+  }
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-  <header>
-    <h1>Cardiac Toys</h1>
 
-    <p class="subtitle">
-      See it. Manipulate it. Understand it.
-    </p>
-  </header>
+<!-- =====================================
+     CARDIAC ACADEMY BRANDING
+===================================== -->
 
-  <main>
+<header class="hero">
 
-    <h2>Choose a Device</h2>
+<img
+  src="cardiac-academy-logo.png"
+  alt="Cardiac Academy by Wade Preston"
+  class="logo"
+>
 
-    <div class="devices">
+</header>
 
-<a href="pac.html" class="device available" style="text-decoration:none; color:white;">
-  <h2>Pulmonary Artery Catheter</h2>
-  <p>Explore PAC placement, waveforms, hemodynamics and calculations.</p>
-  <strong>Explore PAC →</strong>
+
+
+<main>
+
+
+<!-- =====================================
+     INTRODUCTION
+===================================== -->
+
+<section class="intro">
+
+<h1>
+Interactive Cardiac Education
+</h1>
+
+<div class="gold-line"></div>
+
+<p>
+Explore cardiovascular physiology,
+hemodynamics, waveforms and mechanical
+circulatory support through interactive
+learning modules.
+</p>
+
+</section>
+
+
+
+<!-- =====================================
+     MODULES
+===================================== -->
+
+<section class="devices">
+
+
+<!-- =====================================
+     PAC
+===================================== -->
+
+<a
+  href="pac.html"
+  class="device available"
+>
+
+<div>
+
+<h2>
+Pulmonary Artery Catheter
+</h2>
+
+<p>
+Follow a PAC through the heart,
+recognize RA, RV, PA and wedge
+waveforms, enter measured hemodynamics,
+calculate derived values and understand
+what the numbers mean physiologically.
+</p>
+
+</div>
+
+<div class="explore">
+Enter Module →
+</div>
+
 </a>
 
-      <div class="device">
-        <h2>IABP</h2>
-        <p class="coming-soon">Coming Soon</p>
-      </div>
 
-      <div class="device">
-        <h2>Impella</h2>
-        <p class="coming-soon">Coming Soon</p>
-      </div>
 
-      <div class="device">
-        <h2>VA-ECMO</h2>
-        <p class="coming-soon">Coming Soon</p>
-      </div>
+<!-- =====================================
+     IABP
+===================================== -->
 
-      <div class="device">
-        <h2>LVAD</h2>
-        <p class="coming-soon">Coming Soon</p>
-      </div>
+<div class="device">
 
-    </div>
+<div>
 
-  </main>
+<h2>
+Intra-Aortic Balloon Pump
+</h2>
 
-  <footer>
-    Cardiac Toys is intended for education and simulation only.
-    It is not intended for clinical decision-making.
-  </footer>
+<p>
+Explore balloon timing,
+diastolic augmentation,
+afterload reduction and the
+relationship between the balloon
+and arterial pressure waveform.
+</p>
+
+</div>
+
+<div class="coming">
+Coming Soon
+</div>
+
+</div>
+
+
+
+<!-- =====================================
+     IMPELLA
+===================================== -->
+
+<div class="device">
+
+<div>
+
+<h2>
+Impella
+</h2>
+
+<p>
+Explore ventricular unloading,
+device flow, preload dependence,
+afterload sensitivity and suction
+physiology.
+</p>
+
+</div>
+
+<div class="coming">
+Coming Soon
+</div>
+
+</div>
+
+
+
+<!-- =====================================
+     VA ECMO
+===================================== -->
+
+<div class="device">
+
+<div>
+
+<h2>
+VA-ECMO
+</h2>
+
+<p>
+Explore extracorporeal circulation,
+systemic perfusion, ventricular loading,
+oxygen delivery and VA-ECMO
+hemodynamics.
+</p>
+
+</div>
+
+<div class="coming">
+Coming Soon
+</div>
+
+</div>
+
+
+
+<!-- =====================================
+     VV ECMO
+===================================== -->
+
+<div class="device">
+
+<div>
+
+<h2>
+VV-ECMO
+</h2>
+
+<p>
+Explore extracorporeal gas exchange,
+oxygenation, carbon dioxide removal
+and recirculation.
+</p>
+
+</div>
+
+<div class="coming">
+Coming Soon
+</div>
+
+</div>
+
+
+
+<!-- =====================================
+     LVAD
+===================================== -->
+
+<div class="device">
+
+<div>
+
+<h2>
+LVAD
+</h2>
+
+<p>
+Explore continuous-flow support,
+ventricular unloading,
+preload dependence and
+afterload relationships.
+</p>
+
+</div>
+
+<div class="coming">
+Coming Soon
+</div>
+
+</div>
+
+
+
+<!-- =====================================
+     RVAD
+===================================== -->
+
+<div class="device">
+
+<div>
+
+<h2>
+Temporary RVAD
+</h2>
+
+<p>
+Explore right ventricular support,
+venous drainage, pulmonary blood flow
+and right-sided mechanical
+circulatory support.
+</p>
+
+</div>
+
+<div class="coming">
+Coming Soon
+</div>
+
+</div>
+
+
+
+<!-- =====================================
+     PACING
+===================================== -->
+
+<div class="device">
+
+<div>
+
+<h2>
+Epicardial Pacing
+</h2>
+
+<p>
+Explore temporary pacing modes,
+sensing, capture, thresholds and
+post-cardiac-surgery pacing
+physiology.
+</p>
+
+</div>
+
+<div class="coming">
+Coming Soon
+</div>
+
+</div>
+
+
+
+<!-- =====================================
+     CABG
+===================================== -->
+
+<div class="device">
+
+<div>
+
+<h2>
+CABG Anatomy
+</h2>
+
+<p>
+Explore coronary anatomy,
+bypass graft placement and
+postoperative cardiac surgical
+physiology.
+</p>
+
+</div>
+
+<div class="coming">
+Coming Soon
+</div>
+
+</div>
+
+
+
+<!-- =====================================
+     VALVES
+===================================== -->
+
+<div class="device">
+
+<div>
+
+<h2>
+Valve Surgery
+</h2>
+
+<p>
+Explore cardiac valve anatomy,
+surgical repair and replacement,
+and the hemodynamic consequences
+of valve disease.
+</p>
+
+</div>
+
+<div class="coming">
+Coming Soon
+</div>
+
+</div>
+
+
+
+<!-- =====================================
+     ARTERIAL LINE
+===================================== -->
+
+<div class="device">
+
+<div>
+
+<h2>
+Arterial Line
+</h2>
+
+<p>
+Explore arterial pressure waveforms,
+damping, resonance, leveling,
+zeroing and waveform interpretation.
+</p>
+
+</div>
+
+<div class="coming">
+Coming Soon
+</div>
+
+</div>
+
+
+
+<!-- =====================================
+     CENTRAL LINE
+===================================== -->
+
+<div class="device">
+
+<div>
+
+<h2>
+Central Line & CVP
+</h2>
+
+<p>
+Explore central venous access,
+right atrial pressure,
+CVP waveforms and venous
+hemodynamics.
+</p>
+
+</div>
+
+<div class="coming">
+Coming Soon
+</div>
+
+</div>
+
+
+</section>
+
+
+
+<!-- =====================================
+     ABOUT
+===================================== -->
+
+<div class="section-divider">
+
+<span>
+CARDIAC ACADEMY
+</span>
+
+</div>
+
+
+<div class="about">
+
+<strong>
+See it. Manipulate it. Understand it.
+</strong>
+
+<br><br>
+
+Cardiac Academy is an interactive
+educational project designed to make
+complex cardiovascular physiology,
+hemodynamics and cardiac support devices
+easier to visualize and understand.
+
+</div>
+
+
+</main>
+
+
+
+<!-- =====================================
+     FOOTER
+===================================== -->
+
+<footer>
+
+<div class="footer-name">
+CARDIAC ACADEMY · BY WADE PRESTON
+</div>
+
+Cardiac Academy is intended for
+education and simulation only.
+
+<br>
+
+It is not intended for clinical
+decision-making and does not replace
+institutional protocols, manufacturer
+instructions or clinical judgment.
+
+</footer>
+
 
 </body>
+
 </html>
