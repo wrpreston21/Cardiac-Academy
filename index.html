@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Cardiac Toys</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #07111f;
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      padding: 80px 20px 40px;
+    }
+
+    h1 {
+      font-size: 60px;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #aab7c4;
+      font-size: 20px;
+    }
+
+    .devices {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 40px;
+    }
+
+    .device {
+      background: #111f30;
+      border: 1px solid #26384d;
+      border-radius: 16px;
+      padding: 30px;
+      width: 220px;
+    }
+
+    .device h2 {
+      margin-top: 0;
+    }
+
+    .available {
+      border-color: #4fa3ff;
+      cursor: pointer;
+    }
+
+    .coming-soon {
+      color: #778899;
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 30px;
+      color: #778899;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Cardiac Toys</h1>
+
+    <p class="subtitle">
+      See it. Manipulate it. Understand it.
+    </p>
+  </header>
+
+  <main>
+
+    <h2>Choose a Device</h2>
+
+    <div class="devices">
+
+      <div class="device available">
+        <h2>Pulmonary Artery Catheter</h2>
+        <p>Explore PAC placement, waveforms, hemodynamics and calculations.</p>
+        <strong>Explore PAC →</strong>
+      </div>
+
+      <div class="device">
+        <h2>IABP</h2>
+        <p class="coming-soon">Coming Soon</p>
+      </div>
+
+      <div class="device">
+        <h2>Impella</h2>
+        <p class="coming-soon">Coming Soon</p>
+      </div>
+
+      <div class="device">
+        <h2>VA-ECMO</h2>
+        <p class="coming-soon">Coming Soon</p>
+      </div>
+
+      <div class="device">
+        <h2>LVAD</h2>
+        <p class="coming-soon">Coming Soon</p>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer>
+    Cardiac Toys is intended for education and simulation only.
+    It is not intended for clinical decision-making.
+  </footer>
+
+</body>
+</html>
