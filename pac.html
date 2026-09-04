@@ -1587,8 +1587,6 @@ let stageIndex=0;
 
 function drawStage(){
 
-function drawStage(){
-
   const s=stages[stageIndex];
 
   /* =========================================
@@ -1663,6 +1661,13 @@ function drawStage(){
   const tip=$("pacTip");
   const balloon=$("balloon");
   const thermistor=$("thermistor");
+
+  /* Give the visible catheter and its shadow the same geometry as the
+     invisible master route. The dash length below then controls how much
+     catheter is actually visible at each stage. */
+  const routeD=route.getAttribute("d");
+  visiblePAC.setAttribute("d",routeD);
+  shadow.setAttribute("d",routeD);
 
   const totalLength=route.getTotalLength();
 
