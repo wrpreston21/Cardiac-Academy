@@ -1154,7 +1154,20 @@ using the Mosteller equation and used for indexed hemodynamic values.
 
 
 <h2 class="section-heading">Measured Hemodynamics</h2>
-
+<div style="display:flex; justify-content:flex-end; margin-bottom:14px;">
+  <button id="resetHemodynamicsBtn"
+    style="
+      background:#164d8b;
+      border:1px solid #278cff;
+      color:white;
+      padding:11px 18px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:bold;
+    ">
+    ↻ Reset to Normal Patient
+  </button>
+</div>
 <p class="section-copy">
 Enter the patient's directly measured values. Green means the value
 falls within this simulator's educational reference range. Red means
@@ -1746,53 +1759,412 @@ function calculations(){
 
 function renderResults(results){
 
- $("resultGrid").innerHTML="";
+  const calculatedCauses = {
 
- results.forEach(r=>{
+    "MAP": {
+      low: [
+        "Hypovolemia",
+        "Systemic vasodilation / decreased SVR",
+        "Reduced cardiac output",
+        "Severe ventricular dysfunction",
+        "Bradycardia or tachyarrhythmia reducing effective cardiac output"
+      ],
+      high: [
+        "Systemic vasoconstriction",
+        "Increased SVR",
+        "Hypertension",
+        "Pain or sympathetic stimulation",
+        "Vasoactive medication effect"
+      ]
+    },
 
-  const [name,value,unit,low,high,range,formula,sub]=r;
+    "Cardiac Index": {
+      low: [
+        "Reduced preload / inadequate ventricular filling",
+        "Reduced ventricular contractility",
+        "Excessive afterload",
+        "RV or LV dysfunction",
+        "Bradycardia",
+        "Tachyarrhythmia with impaired filling",
+        "Mechanical obstruction to cardiac output"
+      ],
+      high: [
+        "Reduced systemic vascular resistance",
+        "Hyperdynamic / high-output state",
+        "Increased metabolic demand",
+        "Compensatory increase in cardiac output"
+      ]
+    },
 
-  let state="NORMAL";
-  if(low!==null&&value<low)state="LOW";
-  if(high!==null&&value>high)state="HIGH";
+    "Stroke Volume": {
+      low: [
+        "Reduced preload / hypovolemia",
+        "Reduced ventricular contractility",
+        "Increased afterload",
+        "RV or LV dysfunction",
+        "Tachycardia with reduced ventricular filling"
+      ],
+      high: [
+        "Increased preload",
+        "Increased ventricular contractility",
+        "Reduced afterload",
+        "Bradycardia with increased ventricular filling"
+      ]
+    },
 
-  const card=document.createElement("div");
+    "Stroke Volume Index": {
+      low: [
+        "Reduced preload / hypovolemia",
+        "Reduced ventricular contractility",
+        "Increased afterload",
+        "RV or LV dysfunction",
+        "Reduced forward flow"
+      ],
+      high: [
+        "Increased preload",
+        "Increased contractility",
+        "Reduced afterload",
+        "Hyperdynamic circulation"
+      ]
+    },
 
-  card.className=
-    "card result-card "+(state==="NORMAL"?"normal":"abnormal");
+    "SVR": {
+      low: [
+        "Systemic vasodilation",
+        "Distributive physiology",
+        "Vasodilator medication effect",
+        "Loss of sympathetic vascular tone",
+        "Hyperdynamic low-resistance state"
+      ],
+      high: [
+        "Systemic vasoconstriction",
+        "Compensatory response to low cardiac output",
+        "Hypovolemia with sympathetic vasoconstriction",
+        "Vasopressor effect",
+        "Increased sympathetic tone"
+      ]
+    },
 
-  card.innerHTML=`
-  <div class="result-name">${name}</div>
-  <div class="result-value">${fmt(value)} <small>${unit}</small></div>
-  <div class="status">● ${state==="NORMAL"?"WITHIN RANGE":state}</div>
-  <div class="definition">Educational reference: ${range}</div>
-  `;
+    "SVRI": {
+      low: [
+        "Systemic vasodilation",
+        "Distributive physiology",
+        "Vasodilator medication effect",
+        "Loss of sympathetic vascular tone"
+      ],
+      high: [
+        "Systemic vasoconstriction",
+        "Compensation for reduced cardiac output",
+        "Hypovolemia with vasoconstriction",
+        "Vasopressor effect",
+        "Increased sympathetic tone"
+      ]
+    },
 
-  card.onclick=()=>{
+    "PVR": {
+      low: [
+        "Pulmonary vasodilation",
+        "Reduced pulmonary vascular tone",
+        "Low transpulmonary pressure gradient"
+      ],
+      high: [
+        "Pulmonary vascular disease / pulmonary hypertension",
+        "Hypoxic pulmonary vasoconstriction",
+        "Pulmonary embolic obstruction",
+        "Increased pulmonary vascular tone",
+        "Elevated transpulmonary pressure gradient"
+      ]
+    },
 
-   $("resultExplanation").innerHTML=`
-   <h2>${name}</h2>
-   <h3>Formula</h3>
-   <div class="formula">${formula}</div>
-   <h3>Your Patient</h3>
-   <div class="formula">${sub} = ${fmt(value)} ${unit}</div>
-   ${
-     value<0
-     ? `<p style="color:#ff8b94"><b>Check the inputs:</b> this pressure relationship produced a negative derived value. Verify measurements and waveform quality.</p>`
-     :""
-   }
-   `;
+    "PVRI": {
+      low: [
+        "Pulmonary vasodilation",
+        "Reduced pulmonary vascular tone",
+        "Low transpulmonary pressure gradient"
+      ],
+      high: [
+        "Pulmonary vascular disease / pulmonary hypertension",
+        "Hypoxic pulmonary vasoconstriction",
+        "Pulmonary embolic obstruction",
+        "Increased pulmonary vascular tone",
+        "Elevated transpulmonary pressure gradient"
+      ]
+    },
 
-   $("resultExplanation").classList.add("show");
+    "RV Stroke Work": {
+      low: [
+        "Reduced RV preload",
+        "Reduced RV contractility",
+        "RV dysfunction",
+        "Low stroke volume",
+        "Reduced pressure generated by the RV"
+      ],
+      high: [
+        "Increased RV workload",
+        "Elevated pulmonary artery pressure",
+        "Increased RV afterload",
+        "Pulmonary hypertension",
+        "Increased stroke volume"
+      ]
+    },
+
+    "RVSWI": {
+      low: [
+        "Reduced RV preload",
+        "Reduced RV contractility",
+        "RV dysfunction",
+        "Low stroke volume index",
+        "Reduced RV forward work"
+      ],
+      high: [
+        "Increased RV workload",
+        "Elevated pulmonary artery pressure",
+        "Increased RV afterload",
+        "Pulmonary hypertension",
+        "Increased indexed stroke volume"
+      ]
+    },
+
+    "LV Stroke Work": {
+      low: [
+        "Reduced LV preload",
+        "Reduced LV contractility",
+        "LV systolic dysfunction",
+        "Low stroke volume",
+        "Low systemic arterial pressure"
+      ],
+      high: [
+        "Increased LV workload",
+        "Elevated systemic arterial pressure",
+        "Increased systemic afterload",
+        "Increased stroke volume",
+        "Systemic hypertension"
+      ]
+    },
+
+    "LVSWI": {
+      low: [
+        "Reduced LV preload",
+        "Reduced LV contractility",
+        "LV dysfunction",
+        "Low stroke volume index",
+        "Reduced LV forward work"
+      ],
+      high: [
+        "Increased LV workload",
+        "Elevated systemic arterial pressure",
+        "Increased systemic afterload",
+        "Systemic hypertension",
+        "Increased indexed stroke volume"
+      ]
+    }
 
   };
 
-  $("resultGrid").appendChild(card);
 
- });
+  $("resultGrid").innerHTML="";
+
+
+  results.forEach(r=>{
+
+    const [
+      name,
+      value,
+      unit,
+      low,
+      high,
+      range,
+      formula,
+      sub
+    ] = r;
+
+
+    let state="NORMAL";
+
+    if(low !== null && value < low){
+      state="LOW";
+    }
+
+    if(high !== null && value > high){
+      state="HIGH";
+    }
+
+
+    const card=document.createElement("div");
+
+    card.className=
+      "card result-card " +
+      (state==="NORMAL" ? "normal" : "abnormal");
+
+
+    let abnormalButton="";
+
+    if(state !== "NORMAL"){
+
+      abnormalButton=`
+        <button
+          type="button"
+          class="cause-button calculated-cause-button">
+          Why can ${name} be ${state.toLowerCase()}?
+        </button>
+
+        <div class="causes calculated-causes"></div>
+      `;
+    }
+
+
+    card.innerHTML=`
+
+      <div class="result-name">
+        ${name}
+      </div>
+
+      <div class="result-value">
+        ${fmt(value)}
+        <small>${unit}</small>
+      </div>
+
+      <div class="status">
+        ● ${state==="NORMAL" ? "WITHIN RANGE" : state}
+      </div>
+
+      <div class="definition">
+        Educational reference: ${range}
+      </div>
+
+      ${abnormalButton}
+
+    `;
+
+
+    /* Clicking the main card opens the calculation */
+
+    card.addEventListener("click",()=>{
+
+      $("resultExplanation").innerHTML=`
+
+        <h2>${name}</h2>
+
+        <h3>Formula</h3>
+
+        <div class="formula">
+          ${formula}
+        </div>
+
+        <h3>Your Patient</h3>
+
+        <div class="formula">
+          ${sub}
+          =
+          <b>${fmt(value)} ${unit}</b>
+        </div>
+
+        ${
+          state !== "NORMAL"
+          ?
+          `<p style="color:#ff9ba3">
+            <b>${state}:</b>
+            This calculated value falls outside the
+            educational reference range of ${range} ${unit}.
+          </p>`
+          :
+          `<p style="color:#75dfa0">
+            <b>Within educational range:</b>
+            ${range} ${unit}
+          </p>`
+        }
+
+        ${
+          value < 0
+          ?
+          `<p style="color:#ff8b94">
+            <b>Check the inputs:</b>
+            this pressure relationship produced a negative
+            derived value. Verify the measured values,
+            waveform quality and pressure relationships.
+          </p>`
+          :
+          ""
+        }
+
+      `;
+
+      $("resultExplanation").classList.add("show");
+
+    });
+
+
+    /* Clicking HIGH/LOW cause button opens causes */
+
+    if(state !== "NORMAL"){
+
+      const button=
+        card.querySelector(".calculated-cause-button");
+
+      const causesBox=
+        card.querySelector(".calculated-causes");
+
+
+      button.addEventListener("click",(event)=>{
+
+        event.stopPropagation();
+
+        const causeSet=calculatedCauses[name];
+
+        const causes=
+          state==="LOW"
+          ? causeSet?.low
+          : causeSet?.high;
+
+
+        if(!causes || causes.length===0){
+
+          causesBox.innerHTML=`
+            <b>Common causes:</b>
+            <p>
+              No cause list has been added for this
+              calculated value yet.
+            </p>
+          `;
+
+        }else{
+
+          causesBox.innerHTML=`
+
+            <b>
+              Common causes of ${state.toLowerCase()} ${name}:
+            </b>
+
+            <ul>
+              ${
+                causes
+                .map(c=>`<li>${c}</li>`)
+                .join("")
+              }
+            </ul>
+
+            <small>
+              An abnormal calculated value is not diagnostic
+              by itself. Interpret it with the measured
+              pressures, waveform quality and overall
+              clinical picture.
+            </small>
+
+          `;
+        }
+
+        causesBox.classList.toggle("show");
+
+      });
+
+    }
+
+
+    $("resultGrid").appendChild(card);
+
+  });
 
 }
-
 
 /* =====================================================
    FICK
@@ -1835,7 +2207,62 @@ function fick(){
 /* =====================================================
    UPDATE
 ===================================================== */
+/* =====================================================
+   RESET TO NORMAL PATIENT
+===================================================== */
 
+const normalPatient = {
+  feet: 5,
+  inches: 10,
+  weight: 180,
+
+  hr: 75,
+sbp: 115,
+dbp: 70,
+
+cvp: 5,
+
+rvs: 22,
+rvd: 4,
+
+pas: 22,
+pad: 10,
+mpap: 16,
+
+wedge: 8,
+
+co: 6.0,
+
+  vo2: 250,
+  hgb: 14,
+  sao2: 98,
+  pao2: 100,
+  svo2: 75,
+  pvo2: 40
+};
+
+$("resetHemodynamicsBtn").addEventListener("click", () => {
+
+  Object.entries(normalPatient).forEach(([id, value]) => {
+    const input = $(id);
+
+    if (input) {
+      input.value = value;
+    }
+  });
+
+  /* Close any open abnormal-cause boxes */
+  document.querySelectorAll(".causes").forEach(box => {
+    box.classList.remove("show");
+  });
+
+  /* Close calculated-result explanation */
+  $("resultExplanation").classList.remove("show");
+
+  /* Recalculate everything */
+  updateAll();
+
+});
 function updateAll(){
  updateMeasureStatus();
  calculations();
