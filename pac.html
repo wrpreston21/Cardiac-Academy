@@ -2361,7 +2361,7 @@ const results=[
    PVRI,
    "dyn·s·m²/cm⁵",
    45,225,
-   "45–225",
+   "120–240",
    "80 × (mPAP − PAOP) / CI",
    `80 × (${mPAP} − ${PAOP}) / ${fmt(CI,2)}`
   ],
@@ -2419,6 +2419,91 @@ const results=[
 }
 
 function renderResults(results){
+
+  /* =========================================================
+     EDUCATIONAL INFORMATION FOR CALCULATED HEMODYNAMICS
+     ========================================================= */
+
+  const calculatedInfo = {
+
+    "MAP": {
+      from: "Systolic blood pressure (SBP) and diastolic blood pressure (DBP)",
+      what: "An estimate of the average pressure in the systemic arterial circulation during one cardiac cycle.",
+      indicates: "Represents the average arterial pressure driving blood flow to the systemic organs and tissues. MAP is commonly used as an overall indicator of systemic perfusion pressure."
+    },
+
+    "Cardiac Index": {
+      from: "Cardiac output (CO) and body surface area (BSA)",
+      what: "Cardiac output adjusted for the patient's body surface area.",
+      indicates: "Provides a size-adjusted assessment of cardiac output, allowing forward blood flow to be interpreted relative to the patient's body size."
+    },
+
+    "Stroke Volume": {
+      from: "Cardiac output (CO) and heart rate (HR)",
+      what: "The volume of blood ejected by the ventricle with each heartbeat.",
+      indicates: "Reflects the amount of blood ejected per beat and is influenced by preload, ventricular contractility and afterload."
+    },
+
+    "Stroke Volume Index": {
+      from: "Stroke volume (SV) and body surface area (BSA)",
+      what: "Stroke volume adjusted for the patient's body surface area.",
+      indicates: "Provides a size-adjusted assessment of the amount of blood ejected with each heartbeat."
+    },
+
+    "SVR": {
+      from: "Mean arterial pressure (MAP), right atrial pressure (RAP/CVP), and cardiac output (CO)",
+      what: "The calculated resistance to blood flow through the systemic circulation.",
+      indicates: "Provides an estimate of systemic vascular tone and the resistive component of LV afterload. Higher SVR generally reflects greater systemic vasoconstriction, while lower SVR generally reflects systemic vasodilation."
+    },
+
+    "SVRI": {
+      from: "Mean arterial pressure (MAP), right atrial pressure (RAP/CVP), and cardiac index (CI)",
+      what: "Systemic vascular resistance indexed to the patient's body surface area.",
+      indicates: "Provides a body-size-adjusted estimate of systemic vascular resistance and systemic vascular tone."
+    },
+
+    "PVR": {
+      from: "Mean pulmonary artery pressure (mPAP), PAOP/PCWP, and cardiac output (CO)",
+      what: "The calculated resistance to blood flow through the pulmonary circulation.",
+      indicates: "Provides an estimate of the resistive load the right ventricle must overcome to move blood through the pulmonary circulation. Elevated PVR indicates increased resistance across the pulmonary vascular bed."
+    },
+
+    "PVRI": {
+      from: "Mean pulmonary artery pressure (mPAP), PAOP/PCWP, and cardiac index (CI)",
+      what: "Pulmonary vascular resistance indexed to the patient's body surface area.",
+      indicates: "Provides a body-size-adjusted estimate of pulmonary vascular resistance and the resistive load imposed by the pulmonary circulation."
+    },
+
+    "RV Stroke Work": {
+      from: "Stroke volume (SV), mean pulmonary artery pressure (mPAP), and right atrial pressure (RAP/CVP)",
+      what: "An estimate of the mechanical work performed by the right ventricle with each heartbeat.",
+      indicates: "Reflects the interaction between the amount of blood ejected by the RV and the pressure against which the RV ejects."
+    },
+
+    "RVSWI": {
+      from: "Stroke volume index (SVI), mean pulmonary artery pressure (mPAP), and right atrial pressure (RAP/CVP)",
+      what: "Right ventricular stroke work adjusted for the patient's body surface area.",
+      indicates: "Provides a size-adjusted estimate of the mechanical work performed by the right ventricle with each heartbeat."
+    },
+
+    "LV Stroke Work": {
+      from: "Stroke volume (SV), mean arterial pressure (MAP), and PAOP/PCWP",
+      what: "An estimate of the mechanical work performed by the left ventricle with each heartbeat.",
+      indicates: "Reflects the interaction between the amount of blood ejected by the LV and the pressure against which the LV ejects."
+    },
+
+    "LVSWI": {
+      from: "Stroke volume index (SVI), mean arterial pressure (MAP), and PAOP/PCWP",
+      what: "Left ventricular stroke work adjusted for the patient's body surface area.",
+      indicates: "Provides a size-adjusted estimate of the mechanical work performed by the left ventricle with each heartbeat."
+    }
+
+  };
+
+
+  /* =========================================================
+     COMMON CAUSES OF ABNORMAL CALCULATED VALUES
+     ========================================================= */
 
   const calculatedCauses = {
 
@@ -2623,6 +2708,10 @@ function renderResults(results){
   };
 
 
+  /* =========================================================
+     CLEAR AND REBUILD CALCULATED RESULT CARDS
+     ========================================================= */
+
   $("resultGrid").innerHTML="";
 
 
@@ -2658,6 +2747,10 @@ function renderResults(results){
       (state==="NORMAL" ? "normal" : "abnormal");
 
 
+    /* =======================================================
+       ABNORMAL VALUE BUTTON
+       ======================================================= */
+
     let abnormalButton="";
 
     if(state !== "NORMAL"){
@@ -2673,6 +2766,10 @@ function renderResults(results){
       `;
     }
 
+
+    /* =======================================================
+       BUILD CALCULATED RESULT CARD
+       ======================================================= */
 
     card.innerHTML=`
 
@@ -2698,13 +2795,40 @@ function renderResults(results){
     `;
 
 
-    /* Clicking the main card opens the calculation */
+    /* =======================================================
+       CLICKING MAIN CARD OPENS EDUCATIONAL EXPLANATION
+       ======================================================= */
 
     card.addEventListener("click",()=>{
+
+      const info=calculatedInfo[name];
 
       $("resultExplanation").innerHTML=`
 
         <h2>${name}</h2>
+
+        ${
+          info
+          ?
+          `
+            <h3>Calculated from</h3>
+            <p>
+              ${info.from}
+            </p>
+
+            <h3>What is it?</h3>
+            <p>
+              ${info.what}
+            </p>
+
+            <h3>What does it indicate?</h3>
+            <p>
+              ${info.indicates}
+            </p>
+          `
+          :
+          ""
+        }
 
         <h3>Formula</h3>
 
@@ -2755,7 +2879,9 @@ function renderResults(results){
     });
 
 
-    /* Clicking HIGH/LOW cause button opens causes */
+    /* =======================================================
+       HIGH / LOW CAUSE BUTTON
+       ======================================================= */
 
     if(state !== "NORMAL"){
 
@@ -2782,6 +2908,7 @@ function renderResults(results){
 
           causesBox.innerHTML=`
             <b>Common causes:</b>
+
             <p>
               No cause list has been added for this
               calculated value yet.
