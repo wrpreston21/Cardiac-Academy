@@ -730,292 +730,524 @@ Select any stage directly or use the catheter controls.
 
 <div class="panel heart-panel">
 
-<div class="heart-stage">
+  <div class="heart-stage">
 
-<svg class="heart-svg"
-     viewBox="0 0 760 620"
-     aria-label="Cutaway heart showing pulmonary artery catheter">
+    <svg class="heart-svg"
+         viewBox="0 0 760 620"
+         aria-label="Interactive cutaway heart showing pulmonary artery catheter advancement">
 
-<!-- GREAT VESSELS -->
+      <defs>
 
-<defs>
+        <radialGradient id="newMuscle" cx="48%" cy="38%">
+          <stop offset="0%" stop-color="#c85c4c"/>
+          <stop offset="58%" stop-color="#8e352e"/>
+          <stop offset="100%" stop-color="#501b1c"/>
+        </radialGradient>
 
-<radialGradient id="muscle" cx="50%" cy="35%">
-<stop offset="0%" stop-color="#b44b3d"/>
-<stop offset="65%" stop-color="#7d2e28"/>
-<stop offset="100%" stop-color="#491b1a"/>
-</radialGradient>
+        <linearGradient id="newVein" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#4284b9"/>
+          <stop offset="100%" stop-color="#173f68"/>
+        </linearGradient>
 
-<linearGradient id="vein" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0%" stop-color="#3977a9"/>
-<stop offset="100%" stop-color="#173f68"/>
-</linearGradient>
+        <linearGradient id="newArtery" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#d55b4b"/>
+          <stop offset="100%" stop-color="#812820"/>
+        </linearGradient>
 
-<linearGradient id="artery" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0%" stop-color="#c64d3e"/>
-<stop offset="100%" stop-color="#7f251f"/>
-</linearGradient>
+        <filter id="pacGlow">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
 
-</defs>
+      </defs>
 
-<!-- SVC -->
-<path d="M238 25 L238 170"
-stroke="url(#vein)"
-stroke-width="65"
-stroke-linecap="round"/>
 
-<!-- IVC -->
-<path d="M238 420 L220 590"
-stroke="url(#vein)"
-stroke-width="66"
-stroke-linecap="round"/>
+      <!-- =========================
+           GREAT VESSELS
+      ========================== -->
 
-<!-- AORTA -->
-<path d="M425 215
-C435 110 420 60 475 48
-C560 28 610 82 595 165
-L585 215"
-fill="none"
-stroke="url(#artery)"
-stroke-width="62"
-stroke-linecap="round"/>
+      <!-- Superior vena cava -->
+      <path
+        d="M225 18 L225 184"
+        fill="none"
+        stroke="url(#newVein)"
+        stroke-width="66"
+        stroke-linecap="round"/>
 
-<!-- PA -->
-<path d="M350 260
-C355 185 405 155 470 158
-C540 160 590 180 700 155"
-fill="none"
-stroke="url(#vein)"
-stroke-width="56"
-stroke-linecap="round"/>
+      <!-- Inferior vena cava -->
+      <path
+        d="M220 410 C215 475 205 530 200 600"
+        fill="none"
+        stroke="url(#newVein)"
+        stroke-width="62"
+        stroke-linecap="round"/>
 
-<!-- LEFT PA -->
-<path d="M405 170 C360 135 325 130 292 140"
-fill="none"
-stroke="url(#vein)"
-stroke-width="40"
-stroke-linecap="round"/>
+      <!-- Aorta -->
+      <path
+        d="M430 230
+           C440 145 420 85 470 58
+           C535 22 620 60 612 145
+           C610 178 600 205 588 230"
+        fill="none"
+        stroke="url(#newArtery)"
+        stroke-width="64"
+        stroke-linecap="round"/>
 
-<!-- PULMONARY VEINS -->
-<path d="M690 260 L535 270"
-stroke="url(#artery)"
-stroke-width="25"
-stroke-linecap="round"/>
-<path d="M690 310 L535 300"
-stroke="url(#artery)"
-stroke-width="25"
-stroke-linecap="round"/>
+      <!-- Main pulmonary artery -->
+      <path
+        id="paAnatomy"
+        d="M360 285
+           C355 225 390 178 448 165
+           C515 150 575 170 705 140"
+        fill="none"
+        stroke="url(#newVein)"
+        stroke-width="58"
+        stroke-linecap="round"/>
 
-<!-- HEART OUTER FORM -->
-<path
-d="M180 160
-C110 195 105 315 145 400
-C185 490 270 565 380 600
-C475 560 555 465 570 360
-C585 260 530 190 465 180
-C415 170 380 205 360 235
-C330 180 250 130 180 160Z"
-fill="url(#muscle)"
-stroke="#cf7565"
-stroke-width="5"/>
+      <!-- Left pulmonary artery -->
+      <path
+        d="M435 170 C390 145 350 137 305 150"
+        fill="none"
+        stroke="url(#newVein)"
+        stroke-width="40"
+        stroke-linecap="round"/>
 
-<!-- RA CAVITY -->
-<path
-d="M175 185
-C135 215 135 320 170 360
-C195 385 240 365 270 325
-L270 215
-C245 180 205 165 175 185Z"
-fill="#351619"
-stroke="#df8879"
-stroke-width="4"/>
+      <!-- Pulmonary veins -->
+      <path
+        d="M705 260 C640 255 590 260 525 275"
+        fill="none"
+        stroke="url(#newArtery)"
+        stroke-width="24"
+        stroke-linecap="round"/>
 
-<!-- RV CAVITY -->
-<path
-d="M225 350
-C225 440 275 525 350 552
-C380 500 390 420 365 340
-C345 290 300 280 265 310Z"
-fill="#321416"
-stroke="#df8879"
-stroke-width="4"/>
+      <path
+        d="M705 310 C640 305 590 305 525 300"
+        fill="none"
+        stroke="url(#newArtery)"
+        stroke-width="24"
+        stroke-linecap="round"/>
 
-<!-- LA -->
-<path
-d="M430 205
-C485 185 525 220 520 285
-C515 330 475 350 430 325
-L395 260
-C400 230 410 215 430 205Z"
-fill="#381517"
-stroke="#df8879"
-stroke-width="4"/>
 
-<!-- LV -->
-<path
-d="M390 315
-C435 285 500 305 525 370
-C550 445 495 535 400 575
-C365 520 350 440 360 375
-C365 345 375 325 390 315Z"
-fill="#2c1113"
-stroke="#df8879"
-stroke-width="4"/>
+      <!-- =========================
+           HEART MUSCLE
+      ========================== -->
 
-<!-- MUSCLE TEXTURE -->
-<g opacity=".35" stroke="#f1a18d" stroke-width="2" fill="none">
-<path d="M160 250 C190 220 220 230 245 255"/>
-<path d="M165 285 C195 260 225 270 248 295"/>
-<path d="M255 385 C285 350 330 360 355 390"/>
-<path d="M265 425 C300 390 335 410 360 445"/>
-<path d="M405 360 C445 330 490 350 510 390"/>
-<path d="M405 410 C450 380 490 410 505 455"/>
-<path d="M405 470 C445 445 470 470 480 505"/>
-</g>
+      <path
+        d="M175 165
+           C120 195 105 285 125 370
+           C150 465 240 555 375 600
+           C475 565 555 475 575 375
+           C595 280 545 205 475 180
+           C420 160 380 190 355 225
+           C315 175 235 135 175 165Z"
+        fill="url(#newMuscle)"
+        stroke="#d87868"
+        stroke-width="5"/>
 
-<!-- VALVES -->
-<g stroke="#f4d6ce" stroke-width="7" stroke-linecap="round">
-<path d="M258 305 L292 330"/>
-<path d="M335 285 L365 255"/>
-<path d="M390 305 L425 330"/>
-</g>
 
-<!-- PAC SHADOW -->
-<path id="pacShadow"
-class="pac-shadow"
-d="M238 15
-L238 155
-C238 210 205 235 220 285
-C235 330 290 315 315 355
-C350 410 375 350 350 290
-C330 245 375 195 425 178
-C480 160 535 165 610 158"/>
+      <!-- =========================
+           CUTAWAY CHAMBERS
+      ========================== -->
 
-<!-- PAC -->
-<path id="pacPath"
-class="pac-line"
-d="M238 15
-L238 155
-C238 210 205 235 220 285
-C235 330 290 315 315 355
-C350 410 375 350 350 290
-C330 245 375 195 425 178
-C480 160 535 165 610 158"/>
+      <!-- Right atrium -->
+      <path
+        id="raChamber"
+        d="M170 190
+           C135 225 135 310 165 355
+           C190 390 235 380 270 340
+           L278 225
+           C250 185 205 165 170 190Z"
+        fill="#29151b"
+        stroke="#e29a8d"
+        stroke-width="4"/>
 
-<!-- PROXIMAL RA LUMEN EXIT -->
-<circle class="ra-port" cx="220" cy="275" r="8"/>
+      <!-- Right ventricle -->
+      <path
+        id="rvChamber"
+        d="M235 345
+           C225 425 270 515 350 555
+           C385 500 395 415 370 340
+           C350 290 305 285 270 315Z"
+        fill="#261319"
+        stroke="#e29a8d"
+        stroke-width="4"/>
 
-<!-- THERMISTOR -->
-<circle class="thermistor" cx="535" cy="165" r="8"/>
+      <!-- Left atrium -->
+      <path
+        d="M425 205
+           C480 185 525 220 522 280
+           C520 325 485 348 440 330
+           L400 270
+           C400 235 410 215 425 205Z"
+        fill="#30151a"
+        stroke="#e29a8d"
+        stroke-width="4"/>
 
-<!-- BALLOON -->
-<ellipse id="balloon"
-class="pac-balloon"
-cx="585"
-cy="160"
-rx="18"
-ry="11"/>
+      <!-- Left ventricle -->
+      <path
+        d="M400 315
+           C445 290 505 315 530 375
+           C555 445 500 535 400 575
+           C365 520 355 435 365 375
+           C370 345 382 325 400 315Z"
+        fill="#241116"
+        stroke="#e29a8d"
+        stroke-width="4"/>
 
-<!-- TIP -->
-<circle id="pacTip"
-class="pac-tip"
-cx="612"
-cy="158"
-r="7"/>
 
-<!-- LABELS -->
+      <!-- Septum -->
+      <path
+        d="M365 320
+           C380 375 385 455 398 550"
+        fill="none"
+        stroke="#a74d43"
+        stroke-width="18"
+        stroke-linecap="round"/>
 
-<line class="label-line" x1="238" y1="85" x2="110" y2="85"/>
-<text class="label-text" x="20" y="80">Superior</text>
-<text class="label-text" x="20" y="98">Vena Cava</text>
 
-<line class="label-line" x1="190" y1="250" x2="90" y2="225"/>
-<text class="label-text" x="15" y="220">Right Atrium</text>
+      <!-- =========================
+           VALVES
+      ========================== -->
 
-<line class="label-line" x1="270" y1="315" x2="95" y2="355"/>
-<text class="label-text" x="10" y="350">Tricuspid Valve</text>
+      <!-- Tricuspid valve -->
+      <g id="tricuspidValve"
+         stroke="#f6d9cf"
+         stroke-width="7"
+         stroke-linecap="round">
+        <path d="M255 310 L280 332"/>
+        <path d="M282 310 L265 335"/>
+      </g>
 
-<line class="label-line" x1="300" y1="425" x2="105" y2="480"/>
-<text class="label-text" x="15" y="475">Right Ventricle</text>
+      <!-- Pulmonic valve -->
+      <g id="pulmonicValve"
+         stroke="#f6d9cf"
+         stroke-width="7"
+         stroke-linecap="round">
+        <path d="M346 292 L365 267"/>
+        <path d="M365 292 L347 267"/>
+      </g>
 
-<line class="label-line" x1="355" y1="255" x2="625" y2="235"/>
-<text class="label-text" x="635" y="230">Pulmonic Valve</text>
+      <!-- Mitral valve -->
+      <g
+         stroke="#f6d9cf"
+         stroke-width="7"
+         stroke-linecap="round">
+        <path d="M402 310 L425 332"/>
+        <path d="M425 310 L405 334"/>
+      </g>
 
-<line class="label-line" x1="540" y1="165" x2="665" y2="120"/>
-<text class="label-text" x="625" y="105">Pulmonary</text>
-<text class="label-text" x="640" y="123">Artery</text>
 
-</svg>
+      <!-- =========================
+           PAC ROUTE
+           Invisible full route used
+           for catheter animation
+      ========================== -->
 
-<div class="port-legend">
+      <path
+        id="pacRoute"
+        d="M225 8
+           L225 165
+           C225 220 205 250 220 285
+           C235 320 275 310 305 350
+           C345 405 385 355 360 300
+           C340 255 380 205 435 180
+           C500 155 565 165 675 145"
+        fill="none"
+        stroke="none"/>
 
-<h4>PAC COMPONENTS</h4>
 
-<div class="port">
-<span class="dot white"></span>
-<span><b>Proximal infusion lumen</b><br>Infusion; terminates proximally in SVC/RA region.</span>
+      <!-- =========================
+           VISIBLE PAC
+      ========================== -->
+
+      <path
+        id="pacShadow"
+        d=""
+        fill="none"
+        stroke="#001018"
+        stroke-width="15"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        opacity=".55"/>
+
+      <path
+        id="pacPath"
+        d=""
+        fill="none"
+        stroke="#258dff"
+        stroke-width="8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        filter="url(#pacGlow)"/>
+
+
+      <!-- RA / CVP proximal lumen opening -->
+      <circle
+        id="raPort"
+        cx="220"
+        cy="275"
+        r="8"
+        fill="#4fa3ff"
+        stroke="white"
+        stroke-width="2"/>
+
+
+      <!-- Thermistor -->
+      <circle
+        id="thermistor"
+        cx="0"
+        cy="0"
+        r="8"
+        fill="#ff795f"
+        stroke="white"
+        stroke-width="2"/>
+
+
+      <!-- Balloon -->
+      <ellipse
+        id="balloon"
+        cx="0"
+        cy="0"
+        rx="19"
+        ry="12"
+        fill="rgba(255,211,92,.72)"
+        stroke="#ffe49c"
+        stroke-width="2"
+        opacity=".22"/>
+
+
+      <!-- Distal catheter tip -->
+      <circle
+        id="pacTip"
+        cx="0"
+        cy="0"
+        r="7"
+        fill="#ffe38c"
+        stroke="white"
+        stroke-width="2"/>
+
+
+      <!-- =========================
+           ANATOMICAL LABELS
+      ========================== -->
+
+      <g>
+
+        <line class="label-line"
+              x1="225" y1="90"
+              x2="95" y2="90"/>
+
+        <text class="label-text"
+              x="15" y="84">
+          Superior
+        </text>
+
+        <text class="label-text"
+              x="15" y="102">
+          Vena Cava
+        </text>
+
+
+        <line class="label-line"
+              x1="185" y1="250"
+              x2="85" y2="225"/>
+
+        <text class="label-text"
+              x="10" y="220">
+          Right Atrium
+        </text>
+
+
+        <line class="label-line"
+              x1="270" y1="320"
+              x2="90" y2="355"/>
+
+        <text class="label-text"
+              x="10" y="350">
+          Tricuspid Valve
+        </text>
+
+
+        <line class="label-line"
+              x1="300" y1="425"
+              x2="100" y2="480"/>
+
+        <text class="label-text"
+              x="10" y="475">
+          Right Ventricle
+        </text>
+
+
+        <line class="label-line"
+              x1="355" y1="280"
+              x2="620" y2="245"/>
+
+        <text class="label-text"
+              x="625" y="240">
+          Pulmonic Valve
+        </text>
+
+
+        <line class="label-line"
+              x1="535" y1="165"
+              x2="655" y2="105"/>
+
+        <text class="label-text"
+              x="625" y="88">
+          Pulmonary
+        </text>
+
+        <text class="label-text"
+              x="642" y="106">
+          Artery
+        </text>
+
+      </g>
+
+
+      <!-- =========================
+           DYNAMIC LOCATION LABEL
+      ========================== -->
+
+      <g id="tipLocationLabel">
+
+        <line
+          id="tipLeader"
+          class="label-line"
+          x1="0"
+          y1="0"
+          x2="0"
+          y2="0"/>
+
+        <rect
+          id="tipLabelBox"
+          x="470"
+          y="525"
+          width="250"
+          height="58"
+          rx="9"
+          fill="rgba(3,12,21,.94)"
+          stroke="#d5a95d"/>
+
+        <text
+          id="tipLabelTitle"
+          x="485"
+          y="548"
+          fill="#f0cb84"
+          font-size="13"
+          font-weight="bold">
+          DISTAL TIP
+        </text>
+
+        <text
+          id="tipLabelText"
+          x="485"
+          y="570"
+          fill="#ffffff"
+          font-size="14">
+          Right Atrium
+        </text>
+
+      </g>
+
+    </svg>
+
+
+    <!-- PAC COMPONENT LEGEND -->
+
+    <div class="port-legend">
+
+      <h4>PAC COMPONENTS</h4>
+
+      <div class="port">
+        <span class="dot white"></span>
+        <span>
+          <b>Proximal infusion lumen</b><br>
+          Terminates proximally in the SVC/RA region.
+        </span>
+      </div>
+
+      <div class="port">
+        <span class="dot blue"></span>
+        <span>
+          <b>RA / CVP lumen</b><br>
+          Proximal lumen used for right atrial pressure.
+        </span>
+      </div>
+
+      <div class="port">
+        <span class="dot yellow"></span>
+        <span>
+          <b>Distal PA lumen</b><br>
+          Measures pressure at the catheter tip.
+        </span>
+      </div>
+
+      <div class="port">
+        <span class="dot red"></span>
+        <span>
+          <b>Balloon lumen</b><br>
+          Inflates the distal balloon for flotation and wedge.
+        </span>
+      </div>
+
+      <div class="port">
+        <span class="dot orange"></span>
+        <span>
+          <b>Thermistor</b><br>
+          Used on thermodilution-capable PACs.
+        </span>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- CATHETER CONTROLS -->
+
+  <div class="controls">
+
+    <div class="controls-title">
+      CATHETER CONTROLS
+    </div>
+
+    <div class="control-row">
+
+      <button id="startBtn" class="primary">
+        ◀ Start (RA)
+      </button>
+
+      <button id="advanceBtn" class="primary">
+        → Advance
+      </button>
+
+      <button id="backBtn">
+        ← Back
+      </button>
+
+      <button id="resetBtn">
+        ■ Reset
+      </button>
+
+    </div>
+
+    <div class="progress">
+      <div id="progressBar"
+           class="progress-bar"></div>
+    </div>
+
+    <div id="stepText"
+         class="step-text">
+      Step 1 of 4 · Right Atrium
+    </div>
+
+  </div>
+
 </div>
-
-<div class="port">
-<span class="dot blue"></span>
-<span><b>RA / CVP lumen</b><br>Proximal pressure lumen for right atrial pressure.</span>
-</div>
-
-<div class="port">
-<span class="dot yellow"></span>
-<span><b>Distal PA lumen</b><br>PAP, PAOP and mixed venous sampling.</span>
-</div>
-
-<div class="port">
-<span class="dot red"></span>
-<span><b>Balloon lumen</b><br>Inflates distal balloon for flotation and wedge.</span>
-</div>
-
-<div class="port">
-<span class="dot orange"></span>
-<span><b>Thermistor</b><br>Present on thermodilution-capable PACs.</span>
-</div>
-
-</div>
-
-</div>
-
-<div class="controls">
-
-<div class="controls-title">CATHETER CONTROLS</div>
-
-<div class="control-row">
-
-<button id="startBtn" class="primary">
-◀ Start (RA)
-</button>
-
-<button id="advanceBtn" class="primary">
-→ Advance
-</button>
-
-<button id="backBtn">
-← Back
-</button>
-
-<button id="resetBtn">
-■ Reset
-</button>
-
-</div>
-
-<div class="progress">
-<div id="progressBar" class="progress-bar"></div>
-</div>
-
-<div id="stepText" class="step-text">
-Step 1 of 4 · Right Atrium
-</div>
-
-</div>
-
-</div>
-
 
 <!-- RIGHT COLUMN -->
 
@@ -1355,43 +1587,278 @@ let stageIndex=0;
 
 function drawStage(){
 
- const s=stages[stageIndex];
+function drawStage(){
 
- $("currentLocation").textContent=s.name;
- $("waveDescription").textContent=s.description;
- $("waveMeaning").textContent=s.meaning;
- $("wavePath").setAttribute("d",s.path);
+  const s=stages[stageIndex];
 
- $("waveLabels").innerHTML="";
+  /* =========================================
+     WAVEFORM + TEXT
+  ========================================= */
 
- s.labels.forEach(([label,x,y])=>{
-   const t=document.createElementNS(
-     "http://www.w3.org/2000/svg","text"
-   );
-   t.setAttribute("x",x);
-   t.setAttribute("y",y);
-   t.setAttribute("class","wave-label");
-   t.textContent=label;
-   $("waveLabels").appendChild(t);
- });
+  $("currentLocation").textContent=s.name;
+  $("waveDescription").textContent=s.description;
+  $("waveMeaning").textContent=s.meaning;
+  $("wavePath").setAttribute("d",s.path);
 
- document.querySelectorAll(".stage").forEach((b,i)=>{
-   b.classList.toggle("active",i===stageIndex);
- });
+  $("waveLabels").innerHTML="";
 
- $("progressBar").style.width=((stageIndex+1)/4*100)+"%";
+  s.labels.forEach(([label,x,y])=>{
 
- $("stepText").textContent=
-   `Step ${stageIndex+1} of 4 · ${s.name}`;
+    const t=document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "text"
+    );
 
- document.querySelectorAll(".data-row span:last-child")
- .forEach(x=>x.classList.remove("current"));
+    t.setAttribute("x",x);
+    t.setAttribute("y",y);
+    t.setAttribute("class","wave-label");
+    t.textContent=label;
 
- const summary=$("summary-"+s.id);
- if(summary)summary.classList.add("current");
+    $("waveLabels").appendChild(t);
 
- $("balloon").style.opacity=
-   s.id==="wedge" ? "1" : ".22";
+  });
+
+
+  /* =========================================
+     JOURNEY BUTTONS
+  ========================================= */
+
+  document.querySelectorAll(".stage").forEach((b,i)=>{
+    b.classList.toggle("active",i===stageIndex);
+  });
+
+
+  /* =========================================
+     PROGRESS BAR
+  ========================================= */
+
+  $("progressBar").style.width=
+    ((stageIndex+1)/4*100)+"%";
+
+  $("stepText").textContent=
+    `Step ${stageIndex+1} of 4 · ${s.name}`;
+
+
+  /* =========================================
+     HEMODYNAMIC SUMMARY HIGHLIGHT
+  ========================================= */
+
+  document.querySelectorAll(".data-row span:last-child")
+    .forEach(x=>x.classList.remove("current"));
+
+  const summary=$("summary-"+s.id);
+
+  if(summary){
+    summary.classList.add("current");
+  }
+
+
+  /* =========================================
+     PAC ADVANCEMENT
+  ========================================= */
+
+  const route=$("pacRoute");
+  const visiblePAC=$("pacPath");
+  const shadow=$("pacShadow");
+  const tip=$("pacTip");
+  const balloon=$("balloon");
+  const thermistor=$("thermistor");
+
+  const totalLength=route.getTotalLength();
+
+
+  /*
+     Fraction of the complete PAC route shown
+     at each stage.
+
+     RA     = catheter tip in right atrium
+     RV     = catheter tip in right ventricle
+     PA     = catheter tip in pulmonary artery
+     Wedge  = catheter farther into PA branch
+  */
+
+  const stageFractions={
+    ra:0.38,
+    rv:0.61,
+    pa:0.84,
+    wedge:1.00
+  };
+
+  const fraction=stageFractions[s.id];
+
+  const visibleLength=
+    totalLength*fraction;
+
+
+  /*
+     Draw only the portion of the catheter
+     that has been advanced.
+  */
+
+  visiblePAC.setAttribute(
+    "stroke-dasharray",
+    `${visibleLength} ${totalLength}`
+  );
+
+  visiblePAC.setAttribute(
+    "stroke-dashoffset",
+    "0"
+  );
+
+
+  shadow.setAttribute(
+    "stroke-dasharray",
+    `${visibleLength} ${totalLength}`
+  );
+
+  shadow.setAttribute(
+    "stroke-dashoffset",
+    "0"
+  );
+
+
+  /*
+     Find the coordinates of the distal tip.
+  */
+
+  const tipPoint=
+    route.getPointAtLength(visibleLength);
+
+
+  tip.setAttribute("cx",tipPoint.x);
+  tip.setAttribute("cy",tipPoint.y);
+
+
+  /*
+     Balloon travels with distal tip.
+  */
+
+  balloon.setAttribute("cx",tipPoint.x);
+  balloon.setAttribute("cy",tipPoint.y);
+
+
+  /*
+     Balloon becomes fully visible only
+     during the wedge stage.
+  */
+
+  balloon.style.opacity=
+    s.id==="wedge" ? "1" : ".22";
+
+
+  /*
+     Thermistor sits slightly proximal
+     to the distal tip.
+  */
+
+  const thermistorDistance=
+    Math.max(0,visibleLength-45);
+
+  const thermistorPoint=
+    route.getPointAtLength(thermistorDistance);
+
+  thermistor.setAttribute(
+    "cx",
+    thermistorPoint.x
+  );
+
+  thermistor.setAttribute(
+    "cy",
+    thermistorPoint.y
+  );
+
+
+  /* =========================================
+     DISTAL TIP LOCATION LABEL
+  ========================================= */
+
+  const tipNames={
+    ra:"Right Atrium",
+    rv:"Right Ventricle",
+    pa:"Pulmonary Artery",
+    wedge:"Distal PA · Wedge Position"
+  };
+
+  $("tipLabelText").textContent=
+    tipNames[s.id];
+
+
+  /*
+     Leader line connects the location box
+     to the actual distal catheter tip.
+  */
+
+  $("tipLeader").setAttribute(
+    "x1",
+    tipPoint.x
+  );
+
+  $("tipLeader").setAttribute(
+    "y1",
+    tipPoint.y
+  );
+
+  $("tipLeader").setAttribute(
+    "x2",
+    470
+  );
+
+  $("tipLeader").setAttribute(
+    "y2",
+    550
+  );
+
+
+  /* =========================================
+     CHAMBER HIGHLIGHTING
+  ========================================= */
+
+  const ra=$("raChamber");
+  const rv=$("rvChamber");
+  const pa=$("paAnatomy");
+
+  /*
+     Return anatomy to normal appearance.
+  */
+
+  ra.style.filter="none";
+  rv.style.filter="none";
+  pa.style.filter="none";
+
+  ra.style.strokeWidth="4";
+  rv.style.strokeWidth="4";
+
+
+  /*
+     Highlight the anatomy containing
+     the catheter tip.
+  */
+
+  if(s.id==="ra"){
+
+    ra.style.filter=
+      "drop-shadow(0 0 10px #278cff)";
+
+    ra.style.strokeWidth="7";
+
+  }
+
+  if(s.id==="rv"){
+
+    rv.style.filter=
+      "drop-shadow(0 0 10px #278cff)";
+
+    rv.style.strokeWidth="7";
+
+  }
+
+  if(s.id==="pa" || s.id==="wedge"){
+
+    pa.style.filter=
+      "drop-shadow(0 0 9px #278cff)";
+
+  }
+
 }
 
 document.querySelectorAll(".stage").forEach((b,i)=>{
